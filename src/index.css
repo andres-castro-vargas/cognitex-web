@@ -7,6 +7,10 @@
   --color-gray: #1F2937;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -68,4 +72,10 @@ body {
 
 .animate-smile {
   animation: smile 3s ease-in-out infinite;
+}
+
+/* Marquee animation for footer */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }

@@ -1,19 +1,40 @@
-import Header from './components/layout/Header'
-import HeroSection from './components/sections/HeroSection'
-import NetworkBackground from './components/ui/NetworkBackground'
+import { Routes, Route } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import ContactoPage from './pages/ContactoPage'
+import NosotrosPage from './pages/NosotrosPage'
+import TiendaPage from './pages/TiendaPage'
+import ServiciosPage from './pages/ServiciosPage'
+import NotFoundPage from './pages/NotFoundPage'
+
+// Páginas de servicios individuales
+import CausacionesPage from './pages/servicios/CausacionesPage'
+import ConciliacionDianPage from './pages/servicios/ConciliacionDianPage'
+import ConciliacionesBancariasPage from './pages/servicios/ConciliacionesBancariasPage'
+import NominaPage from './pages/servicios/NominaPage'
+import NotasFinancierasPage from './pages/servicios/NotasFinancierasPage'
+import AgendasArlPage from './pages/servicios/AgendasArlPage'
+import DocumentacionSstPage from './pages/servicios/DocumentacionSstPage'
 
 function App() {
   return (
-    <div className="min-h-screen bg-[#0A0A0A]">
-      {/* Fondo animado de nodos */}
-      <NetworkBackground />
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/contacto" element={<ContactoPage />} />
+      <Route path="/nosotros" element={<NosotrosPage />} />
+      <Route path="/tienda" element={<TiendaPage />} />
+      <Route path="/servicios" element={<ServiciosPage />} />
 
-      {/* Header */}
-      <Header />
+      {/* Rutas de servicios individuales */}
+      <Route path="/servicios/causaciones" element={<CausacionesPage />} />
+      <Route path="/servicios/conciliacion-dian" element={<ConciliacionDianPage />} />
+      <Route path="/servicios/conciliaciones-bancarias" element={<ConciliacionesBancariasPage />} />
+      <Route path="/servicios/nomina" element={<NominaPage />} />
+      <Route path="/servicios/notas-financieras" element={<NotasFinancierasPage />} />
+      <Route path="/servicios/agendas-arl" element={<AgendasArlPage />} />
+      <Route path="/servicios/documentacion-sst" element={<DocumentacionSstPage />} />
 
-      {/* Hero Section */}
-      <HeroSection />
-    </div>
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   )
 }
 

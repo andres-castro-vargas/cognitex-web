@@ -1,8 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Robot from '../ui/Robot';
 
 export default function HeroSection() {
   const [isSecondaryHovered, setIsSecondaryHovered] = useState(false);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+
+  // Efecto para ocultar/mostrar la flecha de scroll basado en scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollIndicator(window.scrollY < 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Estilos EXACTOS del botón primario del original
   const ctaPrimaryStyle: React.CSSProperties = {
@@ -56,29 +67,29 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 px-6 sm:px-8 md:px-12 lg:px-16">
+    <section className="relative min-h-screen flex items-center justify-center pt-12 px-6 sm:px-8 md:px-12 lg:px-16">
       <div className="w-full max-w-[1200px] mx-auto text-center z-10">
 
-        {/* Robot - centrado */}
-        <div className="flex justify-center items-center w-full mb-8">
+        {/* Robot - centrado y con tamaño ajustado */}
+        <div className="flex justify-center items-center w-full mb-4 scale-90">
           <Robot />
         </div>
 
-        {/* Título con gradiente */}
+        {/* Título con gradiente - tamaño reducido para laptops */}
         <h1
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-[#1E40AF] to-[#3B82F6] bg-clip-text text-transparent leading-tight"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-semibold mb-4 bg-gradient-to-r from-white via-[#1E40AF] to-[#3B82F6] bg-clip-text text-transparent leading-tight"
           style={{ fontFamily: "'Tomorrow', sans-serif" }}
         >
           Automatización Inteligente para tu Negocio
         </h1>
 
-        {/* Subtítulo - CENTRADO */}
+        {/* Subtítulo - CENTRADO con espaciado reducido */}
         <p
-          className="text-lg sm:text-xl md:text-2xl text-gray-300 leading-relaxed"
+          className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed"
           style={{
             textAlign: 'center',
             maxWidth: '700px',
-            margin: '1.5rem auto 3rem auto',
+            margin: '1rem auto 2rem auto',
             padding: '0 1rem'
           }}
         >
@@ -131,9 +142,16 @@ export default function HeroSection() {
           </a>
         </div>
 
-        {/* Indicador de scroll */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg className="w-10 h-10 text-[#3B82F6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        {/* Indicador de scroll - perfectamente centrado */}
+        <div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
+          style={{
+            opacity: showScrollIndicator ? 1 : 0,
+            transition: 'opacity 0.3s ease',
+            transform: `translateX(-50%) ${showScrollIndicator ? 'translateY(0)' : 'translateY(10px)'}`
+          }}
+        >
+          <svg className="w-8 h-8 text-[#3B82F6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
         </div>

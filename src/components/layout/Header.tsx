@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import logoCognitex from '../../assets/logo_cognitex.png';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLogoHovered, setIsLogoHovered] = useState(false);
 
   // Estilos con GLASSMORPHISM
   const headerStyle: React.CSSProperties = {
@@ -50,7 +52,11 @@ export default function Header() {
 
   const centerLogoStyle: React.CSSProperties = {
     height: '45px',
-    objectFit: 'contain'
+    objectFit: 'contain',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    transform: isLogoHovered ? 'scale(1.15) rotateY(10deg)' : 'scale(1) rotateY(0deg)',
+    boxShadow: isLogoHovered ? '0 0 20px #3B82F6, 0 0 40px #1E40AF' : 'none'
   };
 
   return (
@@ -81,9 +87,9 @@ export default function Header() {
             />
 
             {/* Texto COGNITEX - solo desktop */}
-            <a href="#" style={logoTextStyle} className="hidden md:block">
+            <Link to="/" style={logoTextStyle} className="hidden md:block">
               COGNITEX
-            </a>
+            </Link>
 
             {/* Redes sociales - solo desktop */}
             <div className="hidden md:flex items-center gap-4">
@@ -112,13 +118,19 @@ export default function Header() {
 
           {/* CENTRO: Logo COGNITEX */}
           <div className="hidden md:flex justify-center">
-            <img src={logoCognitex} alt="COGNITEX Logo" style={centerLogoStyle} />
+            <img
+              src={logoCognitex}
+              alt="COGNITEX Logo"
+              style={centerLogoStyle}
+              onMouseEnter={() => setIsLogoHovered(true)}
+              onMouseLeave={() => setIsLogoHovered(false)}
+            />
           </div>
 
           {/* DERECHA: Menú Desktop */}
           <div className="hidden md:flex items-center justify-end gap-8">
-            <a
-              href="#servicios"
+            <Link
+              to="/servicios"
               style={{
                 color: '#ffffff',
                 textDecoration: 'none',
@@ -130,9 +142,9 @@ export default function Header() {
               onMouseLeave={(e) => e.currentTarget.style.color = '#ffffff'}
             >
               Servicios
-            </a>
-            <a
-              href="#nosotros"
+            </Link>
+            <Link
+              to="/nosotros"
               style={{
                 color: '#ffffff',
                 textDecoration: 'none',
@@ -144,9 +156,23 @@ export default function Header() {
               onMouseLeave={(e) => e.currentTarget.style.color = '#ffffff'}
             >
               Nosotros
-            </a>
-            <a
-              href="#contacto"
+            </Link>
+            <Link
+              to="/tienda"
+              style={{
+                color: '#ffffff',
+                textDecoration: 'none',
+                fontWeight: '500',
+                fontSize: '0.95rem',
+                transition: 'all 0.3s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#3B82F6'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#ffffff'}
+            >
+              Tienda
+            </Link>
+            <Link
+              to="/contacto"
               style={{
                 color: '#ffffff',
                 textDecoration: 'none',
@@ -158,7 +184,7 @@ export default function Header() {
               onMouseLeave={(e) => e.currentTarget.style.color = '#ffffff'}
             >
               Contacto
-            </a>
+            </Link>
             <button
               style={loginBtnStyle}
               onMouseEnter={(e) => {
@@ -239,8 +265,8 @@ export default function Header() {
         {/* Menú Items */}
         <div style={{ display: 'flex', flexDirection: 'column', padding: '1rem 2rem' }}>
           {/* Servicios */}
-          <a
-            href="#servicios"
+          <Link
+            to="/servicios"
             onClick={() => setIsMenuOpen(false)}
             style={{
               color: 'white',
@@ -255,7 +281,7 @@ export default function Header() {
             onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
           >
             Servicios
-          </a>
+          </Link>
 
           {/* Línea divisora */}
           <div style={{
@@ -266,8 +292,8 @@ export default function Header() {
           }} />
 
           {/* Nosotros */}
-          <a
-            href="#nosotros"
+          <Link
+            to="/nosotros"
             onClick={() => setIsMenuOpen(false)}
             style={{
               color: 'white',
@@ -282,7 +308,34 @@ export default function Header() {
             onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
           >
             Nosotros
-          </a>
+          </Link>
+
+          {/* Línea divisora */}
+          <div style={{
+            height: '2px',
+            background: 'linear-gradient(to right, transparent, rgba(59, 130, 246, 0.6), transparent)',
+            margin: '0.5rem 0',
+            boxShadow: '0 0 8px #3B82F6'
+          }} />
+
+          {/* Tienda */}
+          <Link
+            to="/tienda"
+            onClick={() => setIsMenuOpen(false)}
+            style={{
+              color: 'white',
+              textDecoration: 'none',
+              fontWeight: '500',
+              fontSize: '1.25rem',
+              padding: '1.5rem 0',
+              textAlign: 'center',
+              transition: 'color 0.3s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.color = '#3B82F6'}
+            onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
+          >
+            Tienda
+          </Link>
 
           {/* Línea divisora */}
           <div style={{
@@ -293,8 +346,8 @@ export default function Header() {
           }} />
 
           {/* Contacto */}
-          <a
-            href="#contacto"
+          <Link
+            to="/contacto"
             onClick={() => setIsMenuOpen(false)}
             style={{
               color: 'white',
@@ -309,7 +362,7 @@ export default function Header() {
             onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
           >
             Contacto
-          </a>
+          </Link>
 
           {/* Línea divisora */}
           <div style={{

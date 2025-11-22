@@ -61,11 +61,14 @@ export default function NetworkBackground() {
         if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
         if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
 
-        // Dibujar nodo
+        // Dibujar nodo con efecto de glow neón
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = '#3B82F6';
         ctx.beginPath();
         ctx.arc(node.x, parallaxY, node.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(30, 64, 175, ${node.opacity * node.depth})`;
         ctx.fill();
+        ctx.shadowBlur = 0; // Resetear shadow
 
         // Dibujar conexiones
         for (let j = i + 1; j < nodes.length; j++) {
@@ -74,11 +77,15 @@ export default function NetworkBackground() {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < connectionDistance) {
+            // Glow sutil para las líneas de conexión
+            ctx.shadowBlur = 6;
+            ctx.shadowColor = '#3B82F6';
             ctx.beginPath();
             ctx.moveTo(node.x, parallaxY);
             ctx.lineTo(nodes[j].x, nodes[j].y + (scrollY * nodes[j].depth * 0.5));
             ctx.strokeStyle = `rgba(30, 64, 175, ${0.3 * (1 - distance / connectionDistance) * node.depth})`;
             ctx.stroke();
+            ctx.shadowBlur = 0; // Resetear shadow
           }
         }
       });
@@ -102,9 +109,21 @@ export default function NetworkBackground() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full z-0 opacity-45 pointer-events-none"
-    />
+    <>
+      {/* Degradado azul neón de fondo - desde abajo hacia arriba */}
+      <div
+        className="fixed top-0 left-0 w-full h-full pointer-events-none"
+        style={{
+          background: 'linear-gradient(to top, rgba(59, 130, 246, 0.25) 0%, transparent 50%)',
+          zIndex: -1
+        }}
+      />
+
+      {/* Canvas de nodos con efecto neón */}
+      <canvas
+        ref={canvasRef}
+        className="fixed top-0 left-0 w-full h-full z-0 opacity-45 pointer-events-none"
+      />
+    </>
   );
 }
