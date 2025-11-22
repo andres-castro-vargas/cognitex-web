@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(move index.html backup-html-original )",
-      "Bash(move:*)"
+      "Bash(move:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
