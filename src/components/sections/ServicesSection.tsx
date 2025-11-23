@@ -9,6 +9,8 @@ import nominaImg from '../../assets/services/nomina.png';
 import notasFinancierasImg from '../../assets/services/notas-financieras.png';
 import agendasArlImg from '../../assets/services/agendas-arl.png';
 import documentacionSstImg from '../../assets/services/documentacion-sst.png';
+import colaboracionTecnologicaImg from '../../assets/services/Colaboracion-Tecnologica.png';
+import automatizacionAccionImg from '../../assets/services/Automatizacion-en-Accion.png';
 
 interface ServiceCard {
   id: string;
@@ -284,7 +286,7 @@ export default function ServicesSection() {
 
   return (
     <section id="servicios" style={sectionStyle}>
-      <h2 style={mainTitleStyle}>Soluciones que Transforman tu Empresa</h2>
+      <h2 style={mainTitleStyle}>Servicios que Transforman tu Empresa</h2>
 
       {/* SECCIÓN 1: Soluciones para Contadores - CON CARRUSEL */}
       <div style={categoryContainerStyle}>
@@ -499,56 +501,203 @@ export default function ServicesSection() {
         </div>
       </div>
 
-      {/* SECCIÓN 3: Automatizaciones a la Medida - MEJORADO */}
+      {/* SECCIÓN 3: Automatizaciones a la Medida - REDISEÑADO */}
       <div style={categoryContainerStyle}>
         <h3 style={categoryTitleStyle}>Automatizaciones a la Medida</h3>
-        <Link
-          to="/contacto"
-          style={{
-            background: 'linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)',
-            padding: '3rem 2rem',
-            borderRadius: '20px',
-            border: '1px solid #1E40AF',
-            textAlign: 'center',
-            transition: 'all 0.4s',
-            cursor: 'pointer',
-            textDecoration: 'none',
-            display: 'block',
-            position: 'relative',
-            overflow: 'hidden',
-            transform: hoveredCard === 'custom' ? 'translateY(-10px) scale(1.02)' : 'translateY(0) scale(1)',
-            boxShadow: hoveredCard === 'custom' ? '0 25px 50px rgba(30, 64, 175, 0.5)' : '0 10px 30px rgba(30, 64, 175, 0.3)'
-          }}
-          onMouseEnter={() => setHoveredCard('custom')}
-          onMouseLeave={() => setHoveredCard(null)}
+
+        <div style={{
+          position: 'relative',
+          minHeight: '500px',
+          background: 'linear-gradient(135deg, #1E40AF 0%, #0f172a 50%, #1F2937 100%)',
+          borderRadius: '20px',
+          border: '1px solid #1E40AF',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '3rem 2rem',
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: hoveredCard === 'custom' ? 'translateY(-8px) scale(1.01)' : 'translateY(0) scale(1)',
+          boxShadow: hoveredCard === 'custom'
+            ? '0 30px 60px rgba(30, 64, 175, 0.6), 0 0 50px rgba(59, 130, 246, 0.4)'
+            : '0 15px 40px rgba(30, 64, 175, 0.4)'
+        }}
+        onMouseEnter={() => setHoveredCard('custom')}
+        onMouseLeave={() => setHoveredCard(null)}
         >
-          {/* Patrón de fondo decorativo */}
+          {/* Imagen izquierda - Colaboración Tecnológica */}
           <div style={{
             position: 'absolute',
-            top: 0,
             left: 0,
-            right: 0,
+            top: 0,
             bottom: 0,
-            backgroundImage: `
-              linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
-              linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
-              linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
-              linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%)
-            `,
-            backgroundSize: '60px 60px',
-            backgroundPosition: '0 0, 0 30px, 30px -30px, -30px 0px',
-            opacity: 0.3
+            width: '45%',
+            backgroundImage: `url(${colaboracionTecnologicaImg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center right',
+            opacity: hoveredCard === 'custom' ? 0.5 : 0.35,
+            transition: 'all 0.6s ease',
+            maskImage: 'linear-gradient(to right, black 0%, black 40%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to right, black 0%, black 40%, transparent 100%)',
+            transform: hoveredCard === 'custom' ? 'scale(1.1)' : 'scale(1)'
           }} />
 
-          <div style={{ position: 'relative', zIndex: 2 }}>
-            <h3 style={customTitleStyle}>¿Tu proceso no está aquí?</h3>
-            <p style={customSubtitleStyle}>Diseñamos automatizaciones a la medida de tu negocio</p>
-            <p style={customDescStyle}>
-              No importa tu industria. Si tienes un proceso repetitivo que consume tiempo, podemos automatizarlo.
-              Ingenieros, abogados, médicos, arquitectos... cada negocio tiene oportunidades de ahorro.
-            </p>
+          {/* Imagen derecha - Automatización en Acción */}
+          <div style={{
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            bottom: 0,
+            width: '45%',
+            backgroundImage: `url(${automatizacionAccionImg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center left',
+            opacity: hoveredCard === 'custom' ? 0.5 : 0.35,
+            transition: 'all 0.6s ease',
+            maskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to left, black 0%, black 40%, transparent 100%)',
+            transform: hoveredCard === 'custom' ? 'scale(1.1)' : 'scale(1)'
+          }} />
+
+          {/* Banner CTA Profesional */}
+          <div style={{
+            position: 'absolute',
+            top: '2rem',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 3,
+            width: 'auto',
+            maxWidth: '90%'
+          }}>
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(30, 64, 175, 0.95) 0%, rgba(59, 130, 246, 0.95) 100%)',
+              backdropFilter: 'blur(10px)',
+              padding: '0.75rem 2.5rem',
+              borderRadius: '50px',
+              border: '1px solid rgba(59, 130, 246, 0.6)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '1rem',
+              boxShadow: hoveredCard === 'custom'
+                ? '0 10px 30px rgba(59, 130, 246, 0.6), 0 0 20px rgba(59, 130, 246, 0.4)'
+                : '0 8px 20px rgba(30, 64, 175, 0.4)',
+              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              cursor: 'pointer'
+            }}>
+              <span style={{
+                fontSize: '1rem',
+                fontWeight: '600',
+                color: '#ffffff',
+                letterSpacing: '0.5px',
+                whiteSpace: 'nowrap'
+              }}>
+                Solución Personalizada para tu Negocio
+              </span>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                style={{
+                  animation: 'arrowSlide 1.5s ease-in-out infinite'
+                }}
+              >
+                <path
+                  d="M5 12h14M12 5l7 7-7 7"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
           </div>
-        </Link>
+
+          {/* Efecto glow pulsante */}
+          {hoveredCard === 'custom' && (
+            <div style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              width: '80%',
+              height: '80%',
+              transform: 'translate(-50%, -50%)',
+              background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)',
+              animation: 'pulse 2s ease-in-out infinite',
+              pointerEvents: 'none'
+            }} />
+          )}
+
+          {/* Contenido central */}
+          <div style={{
+            position: 'relative',
+            zIndex: 2,
+            textAlign: 'center',
+            maxWidth: '700px',
+            padding: '0 2rem'
+          }}>
+            <div style={{
+              background: hoveredCard === 'custom'
+                ? 'rgba(10, 10, 10, 0.85)'
+                : 'rgba(10, 10, 10, 0.75)',
+              backdropFilter: 'blur(12px)',
+              borderRadius: '20px',
+              padding: '3rem 2.5rem',
+              border: hoveredCard === 'custom'
+                ? '2px solid rgba(59, 130, 246, 0.6)'
+                : '1px solid rgba(30, 64, 175, 0.4)',
+              transition: 'all 0.4s',
+              boxShadow: hoveredCard === 'custom'
+                ? '0 20px 40px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(59, 130, 246, 0.1)'
+                : '0 10px 20px rgba(0, 0, 0, 0.3)'
+            }}>
+              <p style={{
+                fontSize: '1.2rem',
+                fontWeight: '600',
+                color: hoveredCard === 'custom' ? '#60A5FA' : '#9CA3AF',
+                marginBottom: '1.5rem',
+                transition: 'all 0.4s'
+              }}>
+                Diseñamos automatizaciones a la medida de tu negocio
+              </p>
+
+              <p style={{
+                fontSize: '1rem',
+                color: hoveredCard === 'custom' ? '#D1D5DB' : '#9CA3AF',
+                lineHeight: '1.7',
+                marginBottom: '2rem',
+                transition: 'all 0.4s'
+              }}>
+                No importa tu industria. Si tienes un proceso repetitivo que consume tiempo,
+                podemos automatizarlo. Ingenieros, abogados, médicos, arquitectos...
+                cada negocio tiene oportunidades de ahorro.
+              </p>
+
+              <Link
+                to="/contacto"
+                style={{
+                  display: 'inline-block',
+                  background: hoveredCard === 'custom'
+                    ? 'linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%)'
+                    : 'linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)',
+                  color: 'white',
+                  padding: '1rem 3rem',
+                  borderRadius: '50px',
+                  textDecoration: 'none',
+                  fontWeight: '600',
+                  fontSize: '1.1rem',
+                  transition: 'all 0.4s',
+                  boxShadow: hoveredCard === 'custom'
+                    ? '0 15px 35px rgba(59, 130, 246, 0.5)'
+                    : '0 10px 25px rgba(30, 64, 175, 0.4)',
+                  transform: hoveredCard === 'custom' ? 'scale(1.05)' : 'scale(1)'
+                }}
+              >
+                Hablemos de tu proyecto
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

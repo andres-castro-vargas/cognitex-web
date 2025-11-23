@@ -4,7 +4,9 @@
       "Bash(move index.html backup-html-original )",
       "Bash(move:*)",
       "Bash(cat:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(git push:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
