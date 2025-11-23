@@ -79,3 +79,13 @@ body {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+/* Flash animation for SST cards */
+@keyframes flash {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}

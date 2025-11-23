@@ -1,5 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './ServicesCarousel.css';
+
+import causacionesImg from '../../assets/services/causaciones.png';
+import conciliacionDianImg from '../../assets/services/conciliaciones-dian.png';
+import conciliacionesBancariasImg from '../../assets/services/conciliaciones-bancarias.png';
+import nominaImg from '../../assets/services/nomina.png';
+import notasFinancierasImg from '../../assets/services/notas-financieras.png';
+import agendasArlImg from '../../assets/services/agendas-arl.png';
+import documentacionSstImg from '../../assets/services/documentacion-sst.png';
 
 interface ServiceCard {
   id: string;
@@ -11,6 +20,7 @@ interface ServiceCard {
 
 export default function ServicesSection() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [hoveredSstCard, setHoveredSstCard] = useState<string | null>(null);
 
   // SECCIÓN 1: Soluciones para Contadores
   const contadorServices: ServiceCard[] = [
@@ -69,6 +79,16 @@ export default function ServicesSection() {
     }
   ];
 
+  const serviceImages: { [key: string]: string } = {
+    'causaciones': causacionesImg,
+    'conciliacion-dian': conciliacionDianImg,
+    'conciliaciones-bancarias': conciliacionesBancariasImg,
+    'nomina': nominaImg,
+    'notas-financieras': notasFinancierasImg,
+    'agendas-arl': agendasArlImg,
+    'documentacion-sst': documentacionSstImg
+  };
+
   const sectionStyle: React.CSSProperties = {
     padding: '5rem 2rem',
     background: '#0A0A0A'
@@ -118,20 +138,21 @@ export default function ServicesSection() {
     boxShadow: isHovered ? '0 25px 50px rgba(30, 64, 175, 0.4)' : '0 5px 15px rgba(0, 0, 0, 0.3)',
     position: 'relative',
     textDecoration: 'none',
-    display: 'block'
+    display: 'block',
+    minWidth: '380px',
+    flexShrink: 0
   });
 
-  const imagePlaceholderStyle: React.CSSProperties = {
+  const getImageStyle = (serviceId: string, isHovered: boolean): React.CSSProperties => ({
     width: '100%',
     height: '180px',
-    background: '#374151',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: '#6B7280',
-    fontSize: '0.875rem',
-    fontWeight: '500'
-  };
+    backgroundImage: `url(${serviceImages[serviceId]})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    transition: 'transform 0.4s ease',
+    transform: isHovered ? 'scale(1.15)' : 'scale(1)',
+    overflow: 'hidden'
+  });
 
   const cardContentStyle: React.CSSProperties = {
     padding: '1.5rem'
@@ -199,17 +220,37 @@ export default function ServicesSection() {
     margin: '0 auto'
   };
 
-  const renderServiceCard = (service: ServiceCard) => {
-    const isHovered = hoveredCard === service.id;
+  const carouselContainerStyle: React.CSSProperties = {
+    overflow: 'hidden',
+    position: 'relative',
+    width: '100%',
+    margin: '0 auto',
+    WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+    maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
+  };
+
+  const carouselTrackStyle: React.CSSProperties = {
+    display: 'flex',
+    gap: '2rem',
+    animation: 'scroll 60s linear infinite',
+    width: 'fit-content'
+  };
+
+  const carouselTrackPausedStyle: React.CSSProperties = {
+    ...carouselTrackStyle,
+    animationPlayState: 'paused'
+  };
+
+  const renderServiceCard = (service: ServiceCard, customHoverId?: string) => {
+    const effectiveHoverId = customHoverId || service.id;
+    const isHovered = hoveredCard === effectiveHoverId;
 
     const cardContent = (
       <>
         {service.status === 'coming-soon' && (
           <div style={badgeStyle}>Próximamente</div>
         )}
-        <div style={imagePlaceholderStyle}>
-          800 x 450
-        </div>
+        <div style={getImageStyle(service.id, isHovered)} />
         <div style={cardContentStyle}>
           <h3 style={cardTitleStyle}>{service.title}</h3>
           <p style={cardSubtitleStyle}>{service.subtitle}</p>
@@ -220,10 +261,9 @@ export default function ServicesSection() {
     if (service.status === 'active') {
       return (
         <Link
-          key={service.id}
           to={service.link}
           style={getCardStyle(isHovered)}
-          onMouseEnter={() => setHoveredCard(service.id)}
+          onMouseEnter={() => setHoveredCard(effectiveHoverId)}
           onMouseLeave={() => setHoveredCard(null)}
         >
           {cardContent}
@@ -233,9 +273,8 @@ export default function ServicesSection() {
 
     return (
       <div
-        key={service.id}
         style={getCardStyle(isHovered)}
-        onMouseEnter={() => setHoveredCard(service.id)}
+        onMouseEnter={() => setHoveredCard(effectiveHoverId)}
         onMouseLeave={() => setHoveredCard(null)}
       >
         {cardContent}
@@ -247,41 +286,268 @@ export default function ServicesSection() {
     <section id="servicios" style={sectionStyle}>
       <h2 style={mainTitleStyle}>Soluciones que Transforman tu Empresa</h2>
 
-      {/* SECCIÓN 1: Soluciones para Contadores */}
+      {/* SECCIÓN 1: Soluciones para Contadores - CON CARRUSEL */}
       <div style={categoryContainerStyle}>
-        <h3 style={categoryTitleStyle}>Soluciones para Contadores</h3>
-        <div style={gridStyle}>
-          {contadorServices.map(renderServiceCard)}
+        <h3 style={categoryTitleStyle}>Soluciones para Contadores Públicos</h3>
+        <div style={carouselContainerStyle}>
+          <div style={hoveredCard ? carouselTrackPausedStyle : carouselTrackStyle}>
+            {/* Primera copia de las tarjetas */}
+            {contadorServices.map((service, index) =>
+              renderServiceCard(service, `contador-${index}`)
+            )}
+            {/* Segunda copia para efecto infinito */}
+            {contadorServices.map((service, index) =>
+              renderServiceCard(service, `contador-dup-${index}`)
+            )}
+          </div>
         </div>
       </div>
 
-      {/* SECCIÓN 2: Soluciones para SST */}
+      {/* SECCIÓN 2: Soluciones para SST - DISEÑO ESPECIAL */}
       <div style={categoryContainerStyle}>
-        <h3 style={categoryTitleStyle}>Soluciones para SST</h3>
-        <div style={gridStyle}>
-          {sstServices.map(renderServiceCard)}
+        <h3 style={categoryTitleStyle}>Empresas de Seguridad y Salud en el Trabajo</h3>
+
+        <div style={{
+          position: 'relative',
+          height: '400px',
+          background: 'linear-gradient(135deg, #1F2937 0%, #374151 100%)',
+          borderRadius: '20px',
+          border: '1px solid #374151',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '2rem'
+        }}>
+          {/* Imagen izquierda - Agendas ARL */}
+          <div style={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: '40%',
+            backgroundImage: `url(${agendasArlImg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center right',
+            opacity: 0.65,
+            maskImage: 'linear-gradient(to right, black 0%, black 50%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to right, black 0%, black 50%, transparent 100%)'
+          }} />
+
+          {/* Imagen derecha - Documentación SST */}
+          <div style={{
+            position: 'absolute',
+            right: '-5%',
+            top: 0,
+            bottom: 0,
+            width: '45%',
+            backgroundImage: `url(${documentacionSstImg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center left',
+            opacity: 0.65,
+            maskImage: 'linear-gradient(to left, black 0%, black 50%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to left, black 0%, black 50%, transparent 100%)'
+          }} />
+
+          {/* Contenido central */}
+          <div style={{
+            position: 'relative',
+            zIndex: 2,
+            textAlign: 'center',
+            maxWidth: '600px',
+            padding: '0 2rem'
+          }}>
+            <div style={{
+              background: 'rgba(10, 10, 10, 0.7)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '15px',
+              padding: '2.5rem',
+              border: '1px solid rgba(30, 64, 175, 0.3)'
+            }}>
+              <h4 style={{
+                fontSize: '1.5rem',
+                fontWeight: '700',
+                color: '#ffffff',
+                marginBottom: '1rem'
+              }}>
+                Optimiza tu Gestión de SST
+              </h4>
+
+              <div style={{
+                display: 'grid',
+                gap: '1.5rem',
+                marginBottom: '2rem'
+              }}>
+                <Link
+                  to="/servicios/agendas-arl"
+                  style={{
+                    background: hoveredSstCard === 'agendas'
+                      ? 'rgba(30, 64, 175, 0.5)'
+                      : 'rgba(30, 64, 175, 0.2)',
+                    padding: '1rem',
+                    borderRadius: '10px',
+                    border: hoveredSstCard === 'agendas'
+                      ? '2px solid rgba(59, 130, 246, 0.8)'
+                      : '1px solid rgba(59, 130, 246, 0.3)',
+                    textDecoration: 'none',
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                    display: 'block',
+                    transform: hoveredSstCard === 'agendas'
+                      ? 'scale(1.05) translateX(8px)'
+                      : 'scale(1) translateX(0)',
+                    boxShadow: hoveredSstCard === 'agendas'
+                      ? '0 20px 40px rgba(59, 130, 246, 0.4), 0 0 30px rgba(59, 130, 246, 0.3)'
+                      : '0 0 0 rgba(59, 130, 246, 0)',
+                    position: 'relative',
+                    overflow: 'hidden'
+                  }}
+                  onMouseEnter={() => setHoveredSstCard('agendas')}
+                  onMouseLeave={() => setHoveredSstCard(null)}
+                >
+                  {/* Efecto flash al hover */}
+                  {hoveredSstCard === 'agendas' && (
+                    <div style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: '-100%',
+                      width: '100%',
+                      height: '100%',
+                      background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
+                      animation: 'flash 0.6s ease-out',
+                      pointerEvents: 'none'
+                    }} />
+                  )}
+
+                  <p style={{
+                    fontSize: '1.1rem',
+                    fontWeight: '600',
+                    color: '#ffffff',
+                    marginBottom: '0.3rem',
+                    transition: 'all 0.3s'
+                  }}>
+                    Recupera el 60% del tiempo coordinando
+                  </p>
+                  <p style={{
+                    fontSize: '0.85rem',
+                    color: hoveredSstCard === 'agendas' ? '#ffffff' : '#9CA3AF',
+                    transition: 'all 0.3s'
+                  }}>
+                    Automatización de agendamiento con ARL
+                  </p>
+                </Link>
+
+                <Link
+                  to="/servicios/documentacion-sst"
+                  style={{
+                    background: hoveredSstCard === 'documentacion'
+                      ? 'rgba(30, 64, 175, 0.5)'
+                      : 'rgba(30, 64, 175, 0.2)',
+                    padding: '1rem',
+                    borderRadius: '10px',
+                    border: hoveredSstCard === 'documentacion'
+                      ? '2px solid rgba(59, 130, 246, 0.8)'
+                      : '1px solid rgba(59, 130, 246, 0.3)',
+                    textDecoration: 'none',
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                    display: 'block',
+                    transform: hoveredSstCard === 'documentacion'
+                      ? 'scale(1.05) translateX(8px)'
+                      : 'scale(1) translateX(0)',
+                    boxShadow: hoveredSstCard === 'documentacion'
+                      ? '0 20px 40px rgba(59, 130, 246, 0.4), 0 0 30px rgba(59, 130, 246, 0.3)'
+                      : '0 0 0 rgba(59, 130, 246, 0)',
+                    position: 'relative',
+                    overflow: 'hidden'
+                  }}
+                  onMouseEnter={() => setHoveredSstCard('documentacion')}
+                  onMouseLeave={() => setHoveredSstCard(null)}
+                >
+                  {/* Efecto flash al hover */}
+                  {hoveredSstCard === 'documentacion' && (
+                    <div style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: '-100%',
+                      width: '100%',
+                      height: '100%',
+                      background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
+                      animation: 'flash 0.6s ease-out',
+                      pointerEvents: 'none'
+                    }} />
+                  )}
+
+                  <p style={{
+                    fontSize: '1.1rem',
+                    fontWeight: '600',
+                    color: '#ffffff',
+                    marginBottom: '0.3rem',
+                    transition: 'all 0.3s'
+                  }}>
+                    Tu documentación SST siempre al día
+                  </p>
+                  <p style={{
+                    fontSize: '0.85rem',
+                    color: hoveredSstCard === 'documentacion' ? '#ffffff' : '#9CA3AF',
+                    transition: 'all 0.3s'
+                  }}>
+                    Centralización, alertas y formularios automatizados
+                  </p>
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* SECCIÓN 3: Automatizaciones a la Medida */}
+      {/* SECCIÓN 3: Automatizaciones a la Medida - MEJORADO */}
       <div style={categoryContainerStyle}>
         <h3 style={categoryTitleStyle}>Automatizaciones a la Medida</h3>
         <Link
           to="/contacto"
           style={{
-            ...customCardStyle,
+            background: 'linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)',
+            padding: '3rem 2rem',
+            borderRadius: '20px',
+            border: '1px solid #1E40AF',
+            textAlign: 'center',
+            transition: 'all 0.4s',
+            cursor: 'pointer',
+            textDecoration: 'none',
+            display: 'block',
+            position: 'relative',
+            overflow: 'hidden',
             transform: hoveredCard === 'custom' ? 'translateY(-10px) scale(1.02)' : 'translateY(0) scale(1)',
             boxShadow: hoveredCard === 'custom' ? '0 25px 50px rgba(30, 64, 175, 0.5)' : '0 10px 30px rgba(30, 64, 175, 0.3)'
           }}
           onMouseEnter={() => setHoveredCard('custom')}
           onMouseLeave={() => setHoveredCard(null)}
         >
-          <h3 style={customTitleStyle}>¿Tu proceso no está aquí?</h3>
-          <p style={customSubtitleStyle}>Diseñamos automatizaciones a la medida de tu negocio</p>
-          <p style={customDescStyle}>
-            No importa tu industria. Si tienes un proceso repetitivo que consume tiempo, podemos automatizarlo.
-            Ingenieros, abogados, médicos, arquitectos... cada negocio tiene oportunidades de ahorro.
-          </p>
+          {/* Patrón de fondo decorativo */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundImage: `
+              linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+              linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+              linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+              linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%)
+            `,
+            backgroundSize: '60px 60px',
+            backgroundPosition: '0 0, 0 30px, 30px -30px, -30px 0px',
+            opacity: 0.3
+          }} />
+
+          <div style={{ position: 'relative', zIndex: 2 }}>
+            <h3 style={customTitleStyle}>¿Tu proceso no está aquí?</h3>
+            <p style={customSubtitleStyle}>Diseñamos automatizaciones a la medida de tu negocio</p>
+            <p style={customDescStyle}>
+              No importa tu industria. Si tienes un proceso repetitivo que consume tiempo, podemos automatizarlo.
+              Ingenieros, abogados, médicos, arquitectos... cada negocio tiene oportunidades de ahorro.
+            </p>
+          </div>
         </Link>
       </div>
     </section>
