@@ -134,7 +134,7 @@ export default function ServicesSection() {
     borderRadius: '20px',
     border: `1px solid ${isHovered ? '#1E40AF' : '#374151'}`,
     transition: 'all 0.4s',
-    overflow: 'hidden',
+    overflow: 'visible',
     cursor: 'pointer',
     transform: isHovered ? 'translateY(-10px) scale(1.02)' : 'translateY(0) scale(1)',
     boxShadow: isHovered ? '0 25px 50px rgba(30, 64, 175, 0.4)' : '0 5px 15px rgba(0, 0, 0, 0.3)',
@@ -151,6 +151,7 @@ export default function ServicesSection() {
     backgroundImage: `url(${serviceImages[serviceId]})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
+    borderRadius: '20px 20px 0 0',
     transition: 'transform 0.4s ease',
     transform: isHovered ? 'scale(1.15)' : 'scale(1)',
     overflow: 'hidden'
@@ -227,6 +228,7 @@ export default function ServicesSection() {
     position: 'relative',
     width: '100%',
     margin: '0 auto',
+    padding: '2rem 0 3rem 0',
     WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
     maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
   };

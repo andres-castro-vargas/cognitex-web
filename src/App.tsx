@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import ContactoPage from './pages/ContactoPage'
 import NosotrosPage from './pages/NosotrosPage'
@@ -15,26 +16,39 @@ import NotasFinancierasPage from './pages/servicios/NotasFinancierasPage'
 import AgendasArlPage from './pages/servicios/AgendasArlPage'
 import DocumentacionSstPage from './pages/servicios/DocumentacionSstPage'
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/contacto" element={<ContactoPage />} />
-      <Route path="/nosotros" element={<NosotrosPage />} />
-      <Route path="/tienda" element={<TiendaPage />} />
-      <Route path="/servicios" element={<ServiciosPage />} />
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/contacto" element={<ContactoPage />} />
+        <Route path="/nosotros" element={<NosotrosPage />} />
+        <Route path="/tienda" element={<TiendaPage />} />
+        <Route path="/servicios" element={<ServiciosPage />} />
 
-      {/* Rutas de servicios individuales */}
-      <Route path="/servicios/causaciones" element={<CausacionesPage />} />
-      <Route path="/servicios/conciliacion-dian" element={<ConciliacionDianPage />} />
-      <Route path="/servicios/conciliaciones-bancarias" element={<ConciliacionesBancariasPage />} />
-      <Route path="/servicios/nomina" element={<NominaPage />} />
-      <Route path="/servicios/notas-financieras" element={<NotasFinancierasPage />} />
-      <Route path="/servicios/agendas-arl" element={<AgendasArlPage />} />
-      <Route path="/servicios/documentacion-sst" element={<DocumentacionSstPage />} />
+        {/* Rutas de servicios individuales */}
+        <Route path="/servicios/causaciones" element={<CausacionesPage />} />
+        <Route path="/servicios/conciliacion-dian" element={<ConciliacionDianPage />} />
+        <Route path="/servicios/conciliaciones-bancarias" element={<ConciliacionesBancariasPage />} />
+        <Route path="/servicios/nomina" element={<NominaPage />} />
+        <Route path="/servicios/notas-financieras" element={<NotasFinancierasPage />} />
+        <Route path="/servicios/agendas-arl" element={<AgendasArlPage />} />
+        <Route path="/servicios/documentacion-sst" element={<DocumentacionSstPage />} />
 
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </>
   )
 }
 

@@ -129,6 +129,9 @@ export default function Header() {
 
           {/* DERECHA: Menú Desktop */}
           <div className="hidden md:flex items-center justify-end gap-8">
+            <Link to="/" className="text-white hover:text-[#3B82F6] transition-all duration-300 font-medium text-base">
+              Inicio
+            </Link>
             <Link
               to="/servicios"
               style={{
@@ -264,6 +267,23 @@ export default function Header() {
 
         {/* Menú Items */}
         <div style={{ display: 'flex', flexDirection: 'column', padding: '1rem 2rem' }}>
+          {/* Inicio */}
+          <Link
+            to="/"
+            onClick={() => setIsMenuOpen(false)}
+            className="text-white hover:text-[#3B82F6] transition-all duration-300 font-medium text-lg"
+          >
+            Inicio
+          </Link>
+
+          {/* Línea divisora */}
+          <div style={{
+            height: '2px',
+            background: 'linear-gradient(to right, transparent, rgba(59, 130, 246, 0.6), transparent)',
+            margin: '0.5rem 0',
+            boxShadow: '0 0 8px #3B82F6'
+          }} />
+
           {/* Servicios */}
           <Link
             to="/servicios"

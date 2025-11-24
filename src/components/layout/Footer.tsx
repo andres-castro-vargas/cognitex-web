@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import logoCognitex from '../../assets/logo_cognitex.png';
 
-export default function Footer() {
+export default function Footer({ showMarquee = false }: { showMarquee?: boolean }) {
   // Frases para el marquee
   const phrases = [
     'Automatización Inteligente',
@@ -54,7 +54,10 @@ export default function Footer() {
     WebkitBackdropFilter: 'blur(20px)',
     borderTop: '2px solid transparent',
     borderImage: 'linear-gradient(to right, transparent, #3B82F6, transparent) 1',
-    padding: '3rem 2rem 1.5rem',
+    paddingTop: showMarquee ? '5rem' : '3rem',
+    paddingLeft: '2rem',
+    paddingRight: '2rem',
+    paddingBottom: '1.5rem',
     marginTop: '5rem',
     position: 'relative',
     overflow: 'hidden'
@@ -162,16 +165,18 @@ export default function Footer() {
   return (
     <>
       {/* Marquee/Deslizante */}
-      <div style={marqueeContainerStyle}>
-        <div style={marqueeWrapperStyle}>
-          {marqueeContent.map((phrase, index) => (
-            <div key={index} style={marqueeTextStyle}>
-              {phrase}
-              <span style={separatorStyle} />
-            </div>
-          ))}
+      {showMarquee && (
+        <div style={marqueeContainerStyle}>
+          <div style={marqueeWrapperStyle}>
+            {marqueeContent.map((phrase, index) => (
+              <div key={index} style={marqueeTextStyle}>
+                {phrase}
+                <span style={separatorStyle} />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Footer principal */}
       <footer style={footerStyle}>

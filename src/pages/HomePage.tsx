@@ -20,7 +20,7 @@ export default function HomePage() {
       <ServicesSection />
 
       {/* Footer */}
-      <Footer />
+      <Footer showMarquee={true} />
     </div>
   )
 }
