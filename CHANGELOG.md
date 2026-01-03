@@ -4,6 +4,53 @@ Registro de cambios del sitio web cognitex.co
 
 ---
 
+## [2.3.0] - 2026-01-03
+
+### Deploy en Producción + SEO + Nuevos Componentes
+
+#### Deploy con Docker
+- **Dockerfile**: Multi-stage build (Node 20 + Nginx Alpine)
+- **nginx.conf**: Configuración SPA con gzip, cache, security headers
+- **docker-compose.yml**: Para testing local y referencia EasyPanel
+- Deploy exitoso en https://cognitex.co via EasyPanel
+
+#### SEO y Metadatos
+- **Título**: Actualizado de "temp-vite" a "Cognitex"
+- **Favicon**: Cambiado de vite.svg a favicon-cognitex.png (5.7KB optimizado)
+- **Lang**: Cambiado de "en" a "es"
+- **Meta description**: Automatización inteligente para tu negocio
+- **Keywords**: automatización, contabilidad, SST, n8n, Colombia
+- **Open Graph**: Configurado para Facebook/LinkedIn
+- **Twitter Card**: summary_large_image
+- **Theme color**: #175197 (Azul COGNITEX)
+- **Apple touch icon**: favicon-cognitex.png
+
+#### Assets Públicos
+- `public/logo_cognitex.png`: URL estable para emails (https://cognitex.co/logo_cognitex.png)
+- `public/favicon-cognitex.png`: Favicon optimizado (5.7KB)
+
+#### Nuevos Componentes
+- **WhatsAppFloat.tsx**: Botón flotante WhatsApp con SVG oficial, animación pulse
+- **AutomationFormModal.tsx**: Formulario multi-pasos (4 pasos):
+  - Paso 1: Industria (Contadores, SST, Comercio, etc.)
+  - Paso 2: Tamaño de empresa
+  - Paso 3: Procesos a automatizar
+  - Paso 4: Datos de contacto
+  - Integración: Webhook n8n + Resend para emails
+
+#### Paleta Modal (Gris Carbón)
+- Modal fondo: `#1f1f1f`
+- Cards/inputs: `#2a2a2a`
+- Bordes: `#3a3a3a`
+- Azul COGNITEX: `#175197` (botones CTA)
+
+#### Integraciones
+- **Webhook n8n**: https://evolutionapi-n8n-workflows.gdvjzg.easypanel.host/webhook/automation-assessment
+- **Emails**: Resend API (info@cognitex.co)
+- **WhatsApp**: +57 312 406 9303
+
+---
+
 ## [2.2.1] - 2026-01-03
 
 ### Correcciones y Mejoras Menores

@@ -1,7 +1,7 @@
 # COGNITEX WEB - Documento Maestro
 
-**Version:** 2.2.0
-**Ultima actualizacion:** 2026-01-02
+**Version:** 2.3.0
+**Ultima actualizacion:** 2026-01-03
 **Mantenido por:** Andres Castro (CTO)
 
 ---
@@ -37,10 +37,12 @@ Deploy:       EasyPanel (Nixpacks)
 ```
 Cognitex-Sitio-Web/
 ├── public/
-│   └── (assets estáticos)
+│   ├── favicon-cognitex.png    # Favicon optimizado (5.7KB)
+│   ├── logo_cognitex.png       # Logo para emails/OG (130KB)
+│   └── vite.svg                # (no usado)
 ├── src/
 │   ├── assets/
-│   │   └── logo_cognitex.png
+│   │   └── logo_cognitex.png   # Logo para componentes React
 │   ├── components/
 │   │   ├── layout/
 │   │   │   ├── Header.tsx          # Navegación principal
@@ -50,9 +52,11 @@ Cognitex-Sitio-Web/
 │   │   │   └── ServicesSection.tsx # Cards de servicios en HomePage
 │   │   └── ui/
 │   │       ├── AccessModal.tsx     # Modal de acceso a plataformas
+│   │       ├── AutomationFormModal.tsx # Formulario multi-pasos (4 pasos)
 │   │       ├── NetworkBackground.tsx # Nodos animados (canvas)
 │   │       ├── PricingCard.tsx     # Card de planes de precios
-│   │       └── Robot.tsx           # Robot animado interactivo
+│   │       ├── Robot.tsx           # Robot animado interactivo
+│   │       └── WhatsAppFloat.tsx   # Botón flotante WhatsApp
 │   ├── pages/
 │   │   ├── HomePage.tsx            # Página principal
 │   │   ├── ServiciosPage.tsx       # Página de servicios/precios
@@ -66,6 +70,9 @@ Cognitex-Sitio-Web/
 │   ├── App.tsx                     # Router principal
 │   ├── main.tsx                    # Entry point
 │   └── index.css                   # Estilos globales + variables
+├── Dockerfile                      # Multi-stage build (Node + Nginx)
+├── nginx.conf                      # Configuración SPA
+├── docker-compose.yml              # Testing local / EasyPanel
 ├── CHANGELOG.md                    # Historial de cambios
 ├── COGNITEX-WEB-DOCUMENTO-MAESTRO.md # Este documento
 ├── package.json
@@ -283,15 +290,48 @@ npm run lint
 ## Deploy
 
 ### EasyPanel (Hostinger VPS)
-1. Proyecto: "cognitex-web"
-2. Build: Nixpacks v1.34.1
-3. Puerto: 8080
-4. SSL: Let's Encrypt automático
+
+| Campo | Valor |
+|-------|-------|
+| Proyecto | cognitex-web |
+| Source | Git (URL pública) |
+| Repositorio | https://github.com/andres-castro-vargas/cognitex-web.git |
+| Branch | main |
+| Build | Dockerfile |
+| Puerto | 80 (Nginx) |
+| SSL | Let's Encrypt automático |
+
+### Archivos Docker
+
+**Dockerfile:**
+```dockerfile
+# Build stage
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Production stage
+FROM nginx:alpine
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+**nginx.conf:**
+- Gzip compression
+- Cache static assets (1 year)
+- SPA routing (try_files → index.html)
+- Security headers (X-Frame-Options, X-Content-Type-Options)
 
 ### Proceso de Deploy
-1. Push a repositorio (si está conectado Git)
-2. O subir archivos manualmente a EasyPanel
-3. Rebuild automático
+1. Push a GitHub (rama main)
+2. En EasyPanel: Click "Redeploy"
+3. Esperar build (~2-3 min)
+4. Verificar en https://cognitex.co
 
 ---
 
@@ -308,6 +348,8 @@ npm run lint
 
 | Version | Fecha | Cambios Principales |
 |---------|-------|---------------------|
+| 2.3.0 | 2026-01-03 | Deploy Docker/Nginx, SEO/OG, favicon optimizado, WhatsAppFloat, AutomationFormModal |
+| 2.2.1 | 2026-01-03 | Tildes corregidas, hover CTAs, grid 2x2, NosotrosPage actualizado |
 | 2.2.0 | 2026-01-02 | FASE 2: Migracion completa tema claro (9 paginas), estructura SaaS simplificada |
 | 2.1.0 | 2026-01-02 | Lucide icons, alineacion cards, WhatsApp corregido, TiendaPage eliminado |
 | 2.0.0 | 2026-01-02 | Tema claro, reestructuracion navegacion, pagina servicios |
