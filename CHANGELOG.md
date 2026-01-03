@@ -4,6 +4,27 @@ Registro de cambios del sitio web cognitex.co
 
 ---
 
+## [2.3.1] - 2026-01-03
+
+### Patch de Seguridad y Correcciones
+
+#### Error Handling en Formulario
+- **AutomationFormModal.tsx**: Corregido bug critico donde se mostraba exito aunque fallara el envio
+- Agregado estado `isError` para manejar fallos correctamente
+- Nueva UI de error con opciones: "Intentar de nuevo" y "WhatsApp"
+- Eliminado `console.error` del catch block
+
+#### Limpieza de Codigo
+- **ContactoPage.tsx**: Eliminado `console.log` de produccion
+
+#### Documentacion
+- Creada carpeta `docs/` para auditorias y reportes tecnicos
+- Agregado reporte completo de auditoria tecnica
+
+> Ver auditoria completa en `docs/AUDITORIA-COGNITEX-WEB-2026-01-03.md`
+
+---
+
 ## [2.3.0] - 2026-01-03
 
 ### Deploy en Producción + SEO + Nuevos Componentes

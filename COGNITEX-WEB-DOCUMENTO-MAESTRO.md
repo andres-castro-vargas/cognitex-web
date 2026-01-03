@@ -1,6 +1,6 @@
 # COGNITEX WEB - Documento Maestro
 
-**Version:** 2.3.0
+**Version:** 2.3.1
 **Ultima actualizacion:** 2026-01-03
 **Mantenido por:** Andres Castro (CTO)
 
@@ -344,10 +344,27 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ---
 
+## Auditorias Tecnicas
+
+| Fecha | Archivo | Hallazgos | Corregidos | Pendientes |
+|-------|---------|-----------|------------|------------|
+| 2026-01-03 | [AUDITORIA-COGNITEX-WEB-2026-01-03.md](docs/AUDITORIA-COGNITEX-WEB-2026-01-03.md) | 21 | 2 | 19 |
+
+### Resumen Auditoria 03-Ene-2026
+- **Criticos (2):** Imagenes sin optimizar (~19MB), Webhook URL hardcodeada
+- **Altos (5):** package.json incorrecto, falta .env en .gitignore, sin CSP, ~~error silenciado~~, ~~console.log~~
+- **Medios (6):** Codigo muerto, imagenes no usadas, sin lazy loading, CSS duplicado, sin error boundary, sin sitemap
+- **Bajos (8):** robots.txt, manifest.json, analytics, preconnect, links placeholder, service worker, LICENSE
+
+> Los items tachados fueron corregidos en v2.3.1
+
+---
+
 ## Historial de Versiones
 
 | Version | Fecha | Cambios Principales |
 |---------|-------|---------------------|
+| 2.3.1 | 2026-01-03 | Patch seguridad: fix error handling formulario, eliminado console.log, auditoria tecnica |
 | 2.3.0 | 2026-01-03 | Deploy Docker/Nginx, SEO/OG, favicon optimizado, WhatsAppFloat, AutomationFormModal |
 | 2.2.1 | 2026-01-03 | Tildes corregidas, hover CTAs, grid 2x2, NosotrosPage actualizado |
 | 2.2.0 | 2026-01-02 | FASE 2: Migracion completa tema claro (9 paginas), estructura SaaS simplificada |
