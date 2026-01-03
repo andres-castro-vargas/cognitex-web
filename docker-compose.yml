@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  cognitex-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cognitex-web
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    labels:
+      # EasyPanel labels (opcional - EasyPanel puede configurar esto automáticamente)
+      - "traefik.enable=true"
+      - "traefik.http.routers.cognitex-web.rule=Host(`cognitex.co`) || Host(`www.cognitex.co`)"
+      - "traefik.http.routers.cognitex-web.entrypoints=websecure"
+      - "traefik.http.routers.cognitex-web.tls.certresolver=letsencrypt"
+      - "traefik.http.services.cognitex-web.loadbalancer.server.port=80"
