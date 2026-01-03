@@ -1,0 +1,172 @@
+# CHANGELOG - Cognitex Sitio Web
+
+Registro de cambios del sitio web cognitex.co
+
+---
+
+## [2.0.0] - 2026-01-02
+
+### REDISEÑO COMPLETO: Tema Oscuro → Tema Claro
+
+#### Cambio de Paleta de Colores
+- **Background**: `#0A0A0A` → `#FFFFFF` (blanco)
+- **Superficie**: `#F8FAFC` (gris muy claro)
+- **Texto principal**: `#1E293B` (slate oscuro)
+- **Texto secundario**: `#64748B` (gris medio)
+- **Acento primario**: `#1E40AF` (azul oscuro)
+- **Acento secundario**: `#3B82F6` (azul brillante)
+- **Bordes**: `#E2E8F0` (gris claro)
+
+#### Archivos Modificados - Tema
+
+| Archivo | Cambios |
+|---------|---------|
+| `src/index.css` | Variables CSS nuevas, body background blanco |
+| `src/pages/HomePage.tsx` | Background blanco, transición visual Hero→Servicios |
+| `src/components/sections/HeroSection.tsx` | Gradientes y textos para tema claro |
+| `src/components/ui/NetworkBackground.tsx` | Opacidad reducida (0.30), parallax eliminado |
+| `src/components/sections/ServicesSection.tsx` | Cards blancos, bordes transparentes |
+| `src/components/layout/Header.tsx` | Glassmorphism claro, texto oscuro |
+| `src/components/layout/Footer.tsx` | Background claro, gradientes sutiles |
+
+#### Ajustes Visuales
+- **Nodos azules**: Ahora son fijos (sin parallax), opacidad 0.30
+- **Robot**: Mantiene colores originales, sombra sutil al hover
+- **Cards servicios**: Fondo blanco, borde transparente, sombra reducida 50%
+- **SST rectangles**: Fondo `#EFF6FF`, borde `#BFDBFE`
+- **Logo header**: `filter: drop-shadow()` en lugar de `boxShadow` para transparencia PNG
+- **Línea divisora Hero→Servicios**: 50% ancho, max 500px, gradiente azul
+
+---
+
+### REESTRUCTURACIÓN DE NAVEGACIÓN
+
+#### Nuevos Componentes Creados
+
+| Componente | Descripción |
+|------------|-------------|
+| `src/components/ui/AccessModal.tsx` | Modal de acceso con opciones Contadores/SST |
+| `src/components/ui/PricingCard.tsx` | Card reutilizable para planes de precios |
+
+#### Cambios en Navegación
+
+**Header.tsx:**
+- Eliminado: Link "Tienda" del menú (desktop y móvil)
+- Cambiado: "Iniciar Sesión" → "Acceder" (abre AccessModal)
+- Agregado: Estado `isAccessModalOpen` y componente AccessModal
+
+**Footer.tsx:**
+- Eliminado: Link "Tienda" de la sección Enlaces
+
+**App.tsx:**
+- Eliminada: Ruta `/tienda`
+- Eliminada: Importación de `TiendaPage`
+
+---
+
+### NUEVA PÁGINA DE SERVICIOS
+
+**ServiciosPage.tsx** - Reescrita completamente con 3 secciones:
+
+#### 1. Sección Contadores (Activa)
+Planes de precios con 4 opciones:
+
+| Plan | Precio | Límite | Características |
+|------|--------|--------|-----------------|
+| Trial | GRATIS | 30 facturas (7 días) | Descargador + Visor, prueba completa |
+| Básico | $39,900/mes | 500 facturas | Descargador + Visor, Soporte email |
+| Pro | $79,900/mes | 1,000 facturas | + Reportes avanzados, Soporte prioritario |
+| Enterprise | Cotización | Ilimitado | + API, Multi-empresa, Soporte 24/7 |
+
+- Trial: Card verde (`#059669` → `#10B981`), badge "7 Días Gratis"
+- Pro: Card azul, badge "Más Popular"
+- CTAs redirigen a appcontadores.cognitex.co/registro
+
+#### 2. Sección SST (Próximamente)
+- Icono de escudo con gradiente gris
+- Mensaje explicativo
+- CTA "Notificarme" → WhatsApp
+
+#### 3. Sección Automatización Personalizada
+- Card azul degradado con lista de servicios
+- CTA "Agendar Consulta Gratis" → WhatsApp
+
+---
+
+### AccessModal
+
+Modal que aparece al hacer clic en "Acceder":
+
+| Opción | Estado | Acción |
+|--------|--------|--------|
+| Contadores | Activo | Abre appcontadores.cognitex.co |
+| SST | Deshabilitado | Badge "Próximamente", icono candado |
+
+Características:
+- Cierre con Escape key
+- Cierre al hacer clic fuera
+- Bloqueo de scroll del body
+- Animación de entrada
+
+---
+
+### Información de Contacto
+
+**WhatsApp actualizado:** +57 312 406 9303
+
+URLs configuradas:
+- Contadores: `https://appcontadores.cognitex.co`
+- Registro: `https://appcontadores.cognitex.co/registro`
+- WhatsApp: `https://wa.me/573124069303`
+
+---
+
+## [1.0.0] - Noviembre 2025
+
+### Migración Inicial
+- Migrado de HTML estático a React + Vite + TypeScript + Tailwind CSS
+- Estructura de componentes modular
+- Sistema de routing con React Router
+- Deploy en producción
+
+### Componentes Base Creados
+- Header con glassmorphism
+- Footer con marquee
+- HeroSection con robot interactivo
+- ServicesSection con cards
+- NetworkBackground (nodos animados)
+- Robot con ojos que siguen el cursor
+
+---
+
+## Notas de Desarrollo
+
+### Stack Tecnológico
+- **Framework**: React 18 + TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS + CSS-in-JS (inline styles)
+- **Routing**: React Router DOM
+- **Deploy**: EasyPanel (Hostinger VPS)
+- **SSL**: Let's Encrypt
+
+### Convenciones de Código
+- Componentes con `export default function`
+- Estilos inline con `React.CSSProperties`
+- Hover effects con `onMouseEnter/onMouseLeave`
+- Fuente principal: Tomorrow (Google Fonts)
+
+### Paleta de Colores Actual
+```css
+--color-primary: #1E40AF;
+--color-primary-light: #3B82F6;
+--color-bg: #FFFFFF;
+--color-surface: #F8FAFC;
+--color-text-primary: #1E293B;
+--color-text-secondary: #64748B;
+--color-border: #E2E8F0;
+```
+
+---
+
+**Mantenido por:** Andres Castro (CTO)
+**Última actualización:** 2026-01-02

@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logoCognitex from '../../assets/logo_cognitex.png';
+import AccessModal from '../ui/AccessModal';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLogoHovered, setIsLogoHovered] = useState(false);
+  const [isAccessModalOpen, setIsAccessModalOpen] = useState(false);
 
   // Estilos con GLASSMORPHISM - Tema Claro
   const headerStyle: React.CSSProperties = {
@@ -162,20 +164,6 @@ export default function Header() {
               Nosotros
             </Link>
             <Link
-              to="/tienda"
-              style={{
-                color: '#1E293B',
-                textDecoration: 'none',
-                fontWeight: '500',
-                fontSize: '0.95rem',
-                transition: 'all 0.3s'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.color = '#3B82F6'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#1E293B'}
-            >
-              Tienda
-            </Link>
-            <Link
               to="/contacto"
               style={{
                 color: '#1E293B',
@@ -191,6 +179,7 @@ export default function Header() {
             </Link>
             <button
               style={loginBtnStyle}
+              onClick={() => setIsAccessModalOpen(true)}
               onMouseEnter={(e) => {
                 Object.assign(e.currentTarget.style, {
                   transform: 'translateY(-2px)',
@@ -204,7 +193,7 @@ export default function Header() {
                 });
               }}
             >
-              Iniciar Sesión
+              Acceder
             </button>
           </div>
 
@@ -339,33 +328,6 @@ export default function Header() {
             boxShadow: '0 0 8px #3B82F6'
           }} />
 
-          {/* Tienda */}
-          <Link
-            to="/tienda"
-            onClick={() => setIsMenuOpen(false)}
-            style={{
-              color: 'white',
-              textDecoration: 'none',
-              fontWeight: '500',
-              fontSize: '1.25rem',
-              padding: '1.5rem 0',
-              textAlign: 'center',
-              transition: 'color 0.3s'
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.color = '#3B82F6'}
-            onMouseLeave={(e) => e.currentTarget.style.color = 'white'}
-          >
-            Tienda
-          </Link>
-
-          {/* Línea divisora */}
-          <div style={{
-            height: '2px',
-            background: 'linear-gradient(to right, transparent, rgba(59, 130, 246, 0.6), transparent)',
-            margin: '0.5rem 0',
-            boxShadow: '0 0 8px #3B82F6'
-          }} />
-
           {/* Contacto */}
           <Link
             to="/contacto"
@@ -393,7 +355,7 @@ export default function Header() {
             boxShadow: '0 0 8px #3B82F6'
           }} />
 
-          {/* Iniciar Sesión */}
+          {/* Acceder */}
           <div style={{ paddingTop: '1.5rem' }}>
             <button
               style={{
@@ -409,6 +371,10 @@ export default function Header() {
                 transition: 'all 0.3s',
                 boxShadow: 'none'
               }}
+              onClick={() => {
+                setIsMenuOpen(false);
+                setIsAccessModalOpen(true);
+              }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = '#3B82F6';
                 e.currentTarget.style.borderColor = '#3B82F6';
@@ -420,7 +386,7 @@ export default function Header() {
                 e.currentTarget.style.boxShadow = 'none';
               }}
             >
-              Iniciar Sesión
+              Acceder
             </button>
           </div>
         </div>
@@ -443,6 +409,12 @@ export default function Header() {
           </p>
         </div>
       </div>
+
+      {/* Modal de Acceso */}
+      <AccessModal
+        isOpen={isAccessModalOpen}
+        onClose={() => setIsAccessModalOpen(false)}
+      />
     </>
   );
 }

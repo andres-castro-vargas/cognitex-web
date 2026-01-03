@@ -213,14 +213,6 @@ export default function Footer({ showMarquee = false }: { showMarquee?: boolean 
                 Nosotros
               </Link>
               <Link
-                to="/tienda"
-                style={linkStyle}
-                onMouseEnter={(e) => e.currentTarget.style.color = '#3B82F6'}
-                onMouseLeave={(e) => e.currentTarget.style.color = '#64748B'}
-              >
-                Tienda
-              </Link>
-              <Link
                 to="/contacto"
                 style={linkStyle}
                 onMouseEnter={(e) => e.currentTarget.style.color = '#3B82F6'}
