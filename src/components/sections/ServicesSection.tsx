@@ -63,24 +63,6 @@ export default function ServicesSection() {
     }
   ];
 
-  // SECCIÓN 2: Soluciones para SST
-  const sstServices: ServiceCard[] = [
-    {
-      id: 'agendas-arl',
-      title: 'Recupera el 60% del tiempo que pierdes coordinando',
-      subtitle: 'Automatización de agendamiento con ARL',
-      link: '/servicios/agendas-arl',
-      status: 'active'
-    },
-    {
-      id: 'documentacion-sst',
-      title: 'Tu documentación SST siempre al día',
-      subtitle: 'Centralización, alertas y formularios automatizados',
-      link: '/servicios/documentacion-sst',
-      status: 'active'
-    }
-  ];
-
   const serviceImages: { [key: string]: string } = {
     'causaciones': causacionesImg,
     'conciliacion-dian': conciliacionDianImg,
@@ -121,12 +103,6 @@ export default function ServicesSection() {
   const categoryContainerStyle: React.CSSProperties = {
     maxWidth: '1400px',
     margin: '0 auto 5rem'
-  };
-
-  const gridStyle: React.CSSProperties = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-    gap: '2rem'
   };
 
   const getCardStyle = (isHovered: boolean): React.CSSProperties => ({
@@ -188,40 +164,6 @@ export default function ServicesSection() {
     fontWeight: '700',
     textTransform: 'uppercase',
     letterSpacing: '0.5px'
-  };
-
-  const customCardStyle: React.CSSProperties = {
-    background: 'linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)',
-    padding: '3rem 2rem',
-    borderRadius: '20px',
-    border: '1px solid #1E40AF',
-    textAlign: 'center',
-    transition: 'all 0.4s',
-    cursor: 'pointer',
-    textDecoration: 'none',
-    display: 'block'
-  };
-
-  const customTitleStyle: React.CSSProperties = {
-    fontSize: '1.5rem',
-    fontWeight: '700',
-    color: '#ffffff',
-    marginBottom: '1rem'
-  };
-
-  const customSubtitleStyle: React.CSSProperties = {
-    fontSize: '1.1rem',
-    color: '#E5E7EB',
-    marginBottom: '1rem',
-    fontWeight: '600'
-  };
-
-  const customDescStyle: React.CSSProperties = {
-    fontSize: '0.95rem',
-    color: '#D1D5DB',
-    lineHeight: '1.6',
-    maxWidth: '600px',
-    margin: '0 auto'
   };
 
   const carouselContainerStyle: React.CSSProperties = {

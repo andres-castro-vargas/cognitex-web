@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import Robot from '../ui/Robot';
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  onOpenModal?: () => void;
+}
+
+export default function HeroSection({ onOpenModal }: HeroSectionProps) {
   const [isSecondaryHovered, setIsSecondaryHovered] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
@@ -99,9 +103,10 @@ export default function HeroSection() {
 
         {/* Botones CTA - con estilos exactos del original */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-          {/* Botón primario - EXACTO del original */}
+          {/* Botón primario - Abre modal de automatización */}
           <button
             style={ctaPrimaryStyle}
+            onClick={onOpenModal}
             onMouseEnter={(e) => {
               Object.assign(e.currentTarget.style, {
                 transform: 'translateY(-3px) scale(1.05)',

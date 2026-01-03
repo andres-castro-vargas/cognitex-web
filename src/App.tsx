@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom'
 import HomePage from './pages/HomePage'
+import WhatsAppFloat from './components/ui/WhatsAppFloat'
 import ContactoPage from './pages/ContactoPage'
 import NosotrosPage from './pages/NosotrosPage'
 import ServiciosPage from './pages/ServiciosPage'
@@ -29,6 +30,7 @@ function App() {
   return (
     <>
       <ScrollToTop />
+      <WhatsAppFloat />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/contacto" element={<ContactoPage />} />

@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import Header from '../components/layout/Header'
 import Footer from '../components/layout/Footer'
 import HeroSection from '../components/sections/HeroSection'
 import ServicesSection from '../components/sections/ServicesSection'
 import NetworkBackground from '../components/ui/NetworkBackground'
+import AutomationFormModal from '../components/ui/AutomationFormModal'
 
 export default function HomePage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Fondo animado de nodos */}
@@ -14,7 +18,7 @@ export default function HomePage() {
       <Header />
 
       {/* Hero Section */}
-      <HeroSection />
+      <HeroSection onOpenModal={() => setIsModalOpen(true)} />
 
       {/* Transición visual Hero → Servicios (solo línea azul) */}
       <div
@@ -45,6 +49,12 @@ export default function HomePage() {
 
       {/* Footer */}
       <Footer showMarquee={true} />
+
+      {/* Modal de Automatización */}
+      <AutomationFormModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   )
 }
