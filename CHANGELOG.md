@@ -4,6 +4,62 @@ Registro de cambios del sitio web cognitex.co
 
 ---
 
+## [2.2.1] - 2026-01-03
+
+### Correcciones y Mejoras Menores
+
+#### Tildes Corregidas (8 páginas)
+- Corregidas todas las tildes faltantes en textos:
+  - `Proximamente` → `Próximamente`
+  - `Documentacion` → `Documentación`
+  - `automatica` → `automática`
+  - `Gestion` → `Gestión`
+  - `solucion` → `solución`
+  - `politicas` → `políticas`
+  - `Actualizacion` → `Actualización`
+  - `Deteccion` → `Detección`
+  - `correccion` → `corrección`
+  - `digitacion` → `digitación`
+  - `transcripcion` → `transcripción`
+  - `precision` → `precisión`
+  - `revision` → `revisión`
+  - `Clasificacion` → `Clasificación`
+  - `Comparacion` → `Comparación`
+  - `conciliacion` → `conciliación`
+  - `Generacion` → `Generación`
+  - `Notificame` → `Notifícame`
+  - `este` → `esté`
+
+#### Botones CTA con Hover
+- Agregado efecto hover a TODOS los botones CTA:
+  - `transition: 'all 0.3s ease'`
+  - `transform: scale(1.05)` en hover
+  - `boxShadow` aumentado en hover
+- Páginas actualizadas: CausacionesPage, ConciliacionDianPage, ConciliacionesBancariasPage, NominaPage, NotasFinancierasPage, AgendasArlPage, DocumentacionSstPage
+
+#### Botón "Notifícame cuando esté listo"
+- Icono Bell aumentado a 24px (antes 18px)
+- Cambiado a `display: inline-flex` con `alignItems: center`
+- Icono y texto perfectamente centrados
+
+#### Cards de Beneficios (grid 2x2)
+- Cambiado de `auto-fit` a `repeat(2, 1fr)`
+- `maxWidth: 600px` + `margin: 0 auto`
+- 4 cards ahora se muestran en layout 2x2 centrado
+
+#### ConciliacionesBancariasPage
+- Título actualizado: `"Reconcilia bancos automáticamente"` → `"Conciliación Bancaria Automática"`
+
+#### NosotrosPage - Contenido General
+- Hero: "Automatizamos para que tú crezcas" (enfoque general, no solo contadores)
+- Subtítulo actualizado para empresas en general
+- Cards Misión/Enfoque/Compromiso con textos generales
+- Nueva sección "Quiénes somos" con 2 cards de equipo (Andrés Castro, Ana María Rojas)
+- Iconos UserCircle como placeholder para fotos
+- CTA: "¿Listo para transformar tu negocio?"
+
+---
+
 ## [2.2.0] - 2026-01-02
 
 ### FASE 2: Migracion Completa a Tema Claro (9 paginas)
