@@ -93,7 +93,7 @@ export default function ServicesSection() {
 
   const sectionStyle: React.CSSProperties = {
     padding: '5rem 2rem',
-    background: '#0A0A0A'
+    background: 'transparent'
   };
 
   const categoryTitleStyle: React.CSSProperties = {
@@ -101,7 +101,7 @@ export default function ServicesSection() {
     fontWeight: '700',
     marginBottom: '2.5rem',
     textAlign: 'center',
-    background: 'linear-gradient(135deg, #ffffff 0%, #1E40AF 100%)',
+    background: 'linear-gradient(135deg, #1E293B 0%, #1E40AF 100%)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text'
@@ -112,7 +112,7 @@ export default function ServicesSection() {
     fontWeight: '700',
     marginBottom: '4rem',
     textAlign: 'center',
-    background: 'linear-gradient(135deg, #ffffff 0%, #1E40AF 100%)',
+    background: 'linear-gradient(135deg, #1E293B 0%, #1E40AF 100%)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text'
@@ -130,31 +130,32 @@ export default function ServicesSection() {
   };
 
   const getCardStyle = (isHovered: boolean): React.CSSProperties => ({
-    background: 'linear-gradient(135deg, #1F2937 0%, #374151 100%)',
+    background: '#FFFFFF',
     borderRadius: '20px',
-    border: `1px solid ${isHovered ? '#1E40AF' : '#374151'}`,
-    transition: 'all 0.4s',
-    overflow: 'visible',
+    border: '1px solid transparent',
+    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+    overflow: 'hidden',
     cursor: 'pointer',
-    transform: isHovered ? 'translateY(-10px) scale(1.02)' : 'translateY(0) scale(1)',
-    boxShadow: isHovered ? '0 25px 50px rgba(30, 64, 175, 0.4)' : '0 5px 15px rgba(0, 0, 0, 0.3)',
+    transform: isHovered ? 'translateY(-12px) scale(1.06)' : 'translateY(0) scale(1)',
+    boxShadow: isHovered
+      ? '0 30px 60px rgba(30, 64, 175, 0.15), 0 0 40px rgba(59, 130, 246, 0.08)'
+      : '0 4px 20px rgba(0, 0, 0, 0.06)',
     position: 'relative',
     textDecoration: 'none',
     display: 'block',
     minWidth: '380px',
-    flexShrink: 0
+    flexShrink: 0,
+    zIndex: isHovered ? 10 : 1
   });
 
-  const getImageStyle = (serviceId: string, isHovered: boolean): React.CSSProperties => ({
+  const getImageStyle = (serviceId: string, _isHovered: boolean): React.CSSProperties => ({
     width: '100%',
     height: '180px',
     backgroundImage: `url(${serviceImages[serviceId]})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     borderRadius: '20px 20px 0 0',
-    transition: 'transform 0.4s ease',
-    transform: isHovered ? 'scale(1.15)' : 'scale(1)',
-    overflow: 'hidden'
+    transition: 'transform 0.4s ease'
   });
 
   const cardContentStyle: React.CSSProperties = {
@@ -164,14 +165,14 @@ export default function ServicesSection() {
   const cardTitleStyle: React.CSSProperties = {
     fontSize: '1.25rem',
     fontWeight: '600',
-    color: '#ffffff',
+    color: '#1E293B',
     marginBottom: '0.5rem',
     lineHeight: '1.3'
   };
 
   const cardSubtitleStyle: React.CSSProperties = {
     fontSize: '0.9rem',
-    color: '#9CA3AF',
+    color: '#64748B',
     lineHeight: '1.5'
   };
 
@@ -224,13 +225,13 @@ export default function ServicesSection() {
   };
 
   const carouselContainerStyle: React.CSSProperties = {
-    overflow: 'hidden',
+    overflow: 'visible',
     position: 'relative',
     width: '100%',
     margin: '0 auto',
-    padding: '2rem 0 3rem 0',
-    WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
-    maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
+    padding: '2rem 0 4rem 0',
+    WebkitMaskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
+    maskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)'
   };
 
   const carouselTrackStyle: React.CSSProperties = {
@@ -314,14 +315,15 @@ export default function ServicesSection() {
         <div style={{
           position: 'relative',
           height: '400px',
-          background: 'linear-gradient(135deg, #1F2937 0%, #374151 100%)',
+          background: 'linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%)',
           borderRadius: '20px',
-          border: '1px solid #374151',
+          border: '1px solid #E2E8F0',
           overflow: 'hidden',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '2rem'
+          padding: '2rem',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.06)'
         }}>
           {/* Imagen izquierda - Agendas ARL */}
           <div style={{
@@ -333,7 +335,7 @@ export default function ServicesSection() {
             backgroundImage: `url(${agendasArlImg})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center right',
-            opacity: 0.65,
+            opacity: 0.85,
             maskImage: 'linear-gradient(to right, black 0%, black 50%, transparent 100%)',
             WebkitMaskImage: 'linear-gradient(to right, black 0%, black 50%, transparent 100%)'
           }} />
@@ -348,7 +350,7 @@ export default function ServicesSection() {
             backgroundImage: `url(${documentacionSstImg})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center left',
-            opacity: 0.65,
+            opacity: 0.85,
             maskImage: 'linear-gradient(to left, black 0%, black 50%, transparent 100%)',
             WebkitMaskImage: 'linear-gradient(to left, black 0%, black 50%, transparent 100%)'
           }} />
@@ -362,16 +364,17 @@ export default function ServicesSection() {
             padding: '0 2rem'
           }}>
             <div style={{
-              background: 'rgba(10, 10, 10, 0.7)',
+              background: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(10px)',
               borderRadius: '15px',
               padding: '2.5rem',
-              border: '1px solid rgba(30, 64, 175, 0.3)'
+              border: '1px solid rgba(30, 64, 175, 0.2)',
+              boxShadow: '0 8px 32px rgba(30, 64, 175, 0.1)'
             }}>
               <h4 style={{
                 fontSize: '1.5rem',
                 fontWeight: '700',
-                color: '#ffffff',
+                color: '#1E293B',
                 marginBottom: '1rem'
               }}>
                 Optimiza tu Gestión de SST
@@ -386,46 +389,30 @@ export default function ServicesSection() {
                   to="/servicios/agendas-arl"
                   style={{
                     background: hoveredSstCard === 'agendas'
-                      ? 'rgba(30, 64, 175, 0.5)'
-                      : 'rgba(30, 64, 175, 0.2)',
+                      ? 'linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)'
+                      : '#EFF6FF',
                     padding: '1rem',
                     borderRadius: '10px',
                     border: hoveredSstCard === 'agendas'
-                      ? '2px solid rgba(59, 130, 246, 0.8)'
-                      : '1px solid rgba(59, 130, 246, 0.3)',
+                      ? '1px solid #3B82F6'
+                      : '1px solid #BFDBFE',
                     textDecoration: 'none',
                     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                     display: 'block',
                     transform: hoveredSstCard === 'agendas'
-                      ? 'scale(1.05) translateX(8px)'
-                      : 'scale(1) translateX(0)',
+                      ? 'scale(1.03)'
+                      : 'scale(1)',
                     boxShadow: hoveredSstCard === 'agendas'
-                      ? '0 20px 40px rgba(59, 130, 246, 0.4), 0 0 30px rgba(59, 130, 246, 0.3)'
-                      : '0 0 0 rgba(59, 130, 246, 0)',
-                    position: 'relative',
-                    overflow: 'hidden'
+                      ? '0 15px 30px rgba(59, 130, 246, 0.25)'
+                      : '0 2px 8px rgba(0, 0, 0, 0.04)'
                   }}
                   onMouseEnter={() => setHoveredSstCard('agendas')}
                   onMouseLeave={() => setHoveredSstCard(null)}
                 >
-                  {/* Efecto flash al hover */}
-                  {hoveredSstCard === 'agendas' && (
-                    <div style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: '-100%',
-                      width: '100%',
-                      height: '100%',
-                      background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
-                      animation: 'flash 0.6s ease-out',
-                      pointerEvents: 'none'
-                    }} />
-                  )}
-
                   <p style={{
                     fontSize: '1.1rem',
                     fontWeight: '600',
-                    color: '#ffffff',
+                    color: hoveredSstCard === 'agendas' ? '#ffffff' : '#1E293B',
                     marginBottom: '0.3rem',
                     transition: 'all 0.3s'
                   }}>
@@ -433,7 +420,7 @@ export default function ServicesSection() {
                   </p>
                   <p style={{
                     fontSize: '0.85rem',
-                    color: hoveredSstCard === 'agendas' ? '#ffffff' : '#9CA3AF',
+                    color: hoveredSstCard === 'agendas' ? 'rgba(255,255,255,0.9)' : '#64748B',
                     transition: 'all 0.3s'
                   }}>
                     Automatización de agendamiento con ARL
@@ -444,46 +431,30 @@ export default function ServicesSection() {
                   to="/servicios/documentacion-sst"
                   style={{
                     background: hoveredSstCard === 'documentacion'
-                      ? 'rgba(30, 64, 175, 0.5)'
-                      : 'rgba(30, 64, 175, 0.2)',
+                      ? 'linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)'
+                      : '#EFF6FF',
                     padding: '1rem',
                     borderRadius: '10px',
                     border: hoveredSstCard === 'documentacion'
-                      ? '2px solid rgba(59, 130, 246, 0.8)'
-                      : '1px solid rgba(59, 130, 246, 0.3)',
+                      ? '1px solid #3B82F6'
+                      : '1px solid #BFDBFE',
                     textDecoration: 'none',
                     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                     display: 'block',
                     transform: hoveredSstCard === 'documentacion'
-                      ? 'scale(1.05) translateX(8px)'
-                      : 'scale(1) translateX(0)',
+                      ? 'scale(1.03)'
+                      : 'scale(1)',
                     boxShadow: hoveredSstCard === 'documentacion'
-                      ? '0 20px 40px rgba(59, 130, 246, 0.4), 0 0 30px rgba(59, 130, 246, 0.3)'
-                      : '0 0 0 rgba(59, 130, 246, 0)',
-                    position: 'relative',
-                    overflow: 'hidden'
+                      ? '0 15px 30px rgba(59, 130, 246, 0.25)'
+                      : '0 2px 8px rgba(0, 0, 0, 0.04)'
                   }}
                   onMouseEnter={() => setHoveredSstCard('documentacion')}
                   onMouseLeave={() => setHoveredSstCard(null)}
                 >
-                  {/* Efecto flash al hover */}
-                  {hoveredSstCard === 'documentacion' && (
-                    <div style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: '-100%',
-                      width: '100%',
-                      height: '100%',
-                      background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
-                      animation: 'flash 0.6s ease-out',
-                      pointerEvents: 'none'
-                    }} />
-                  )}
-
                   <p style={{
                     fontSize: '1.1rem',
                     fontWeight: '600',
-                    color: '#ffffff',
+                    color: hoveredSstCard === 'documentacion' ? '#ffffff' : '#1E293B',
                     marginBottom: '0.3rem',
                     transition: 'all 0.3s'
                   }}>
@@ -491,7 +462,7 @@ export default function ServicesSection() {
                   </p>
                   <p style={{
                     fontSize: '0.85rem',
-                    color: hoveredSstCard === 'documentacion' ? '#ffffff' : '#9CA3AF',
+                    color: hoveredSstCard === 'documentacion' ? 'rgba(255,255,255,0.9)' : '#64748B',
                     transition: 'all 0.3s'
                   }}>
                     Centralización, alertas y formularios automatizados
@@ -510,9 +481,9 @@ export default function ServicesSection() {
         <div style={{
           position: 'relative',
           minHeight: '500px',
-          background: 'linear-gradient(135deg, #1E40AF 0%, #0f172a 50%, #1F2937 100%)',
+          background: 'linear-gradient(135deg, #1E40AF 0%, #1E3A8A 50%, #1E40AF 100%)',
           borderRadius: '20px',
-          border: '1px solid #1E40AF',
+          border: '1px solid #3B82F6',
           overflow: 'hidden',
           display: 'flex',
           alignItems: 'center',
@@ -521,8 +492,8 @@ export default function ServicesSection() {
           transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
           transform: hoveredCard === 'custom' ? 'translateY(-8px) scale(1.01)' : 'translateY(0) scale(1)',
           boxShadow: hoveredCard === 'custom'
-            ? '0 30px 60px rgba(30, 64, 175, 0.6), 0 0 50px rgba(59, 130, 246, 0.4)'
-            : '0 15px 40px rgba(30, 64, 175, 0.4)'
+            ? '0 30px 60px rgba(30, 64, 175, 0.4), 0 0 50px rgba(59, 130, 246, 0.3)'
+            : '0 15px 40px rgba(30, 64, 175, 0.25)'
         }}
         onMouseEnter={() => setHoveredCard('custom')}
         onMouseLeave={() => setHoveredCard(null)}

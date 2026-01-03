@@ -77,7 +77,7 @@ export default function HeroSection() {
 
         {/* Título con gradiente - tamaño reducido para laptops */}
         <h1
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-semibold mb-4 bg-gradient-to-r from-white via-[#1E40AF] to-[#3B82F6] bg-clip-text text-transparent leading-tight"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-semibold mb-4 bg-gradient-to-r from-[#1E293B] via-[#1E40AF] to-[#3B82F6] bg-clip-text text-transparent leading-tight"
           style={{ fontFamily: "'Tomorrow', sans-serif" }}
         >
           Automatización Inteligente para tu Negocio
@@ -85,7 +85,7 @@ export default function HeroSection() {
 
         {/* Subtítulo - CENTRADO con espaciado reducido */}
         <p
-          className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed"
+          className="text-base sm:text-lg md:text-xl text-[#64748B] leading-relaxed"
           style={{
             textAlign: 'center',
             maxWidth: '700px',

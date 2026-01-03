@@ -26,14 +26,12 @@ export default function NetworkBackground() {
       vy: number;
       size: number;
       opacity: number;
-      depth: number;
     }> = [];
 
     const nodeCount = 80;
     const connectionDistance = 150;
-    let scrollY = 0;
 
-    // Crear nodos
+    // Crear nodos (sin depth para parallax)
     for (let i = 0; i < nodeCount; i++) {
       nodes.push({
         x: Math.random() * canvas.width,
@@ -41,18 +39,15 @@ export default function NetworkBackground() {
         vx: (Math.random() - 0.5) * 0.5,
         vy: (Math.random() - 0.5) * 0.5,
         size: Math.random() * 3 + 2,
-        opacity: Math.random() * 0.5 + 0.5,
-        depth: Math.random() * 0.5 + 0.5
+        opacity: Math.random() * 0.5 + 0.5
       });
     }
 
-    // Animación
+    // Animación - nodos fijos (sin parallax)
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       nodes.forEach((node, i) => {
-        const parallaxY = node.y + (scrollY * node.depth * 0.5);
-
         // Actualizar posición
         node.x += node.vx;
         node.y += node.vy;
@@ -65,27 +60,26 @@ export default function NetworkBackground() {
         ctx.shadowBlur = 12;
         ctx.shadowColor = '#3B82F6';
         ctx.beginPath();
-        ctx.arc(node.x, parallaxY, node.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(30, 64, 175, ${node.opacity * node.depth})`;
+        ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(30, 64, 175, ${node.opacity})`;
         ctx.fill();
-        ctx.shadowBlur = 0; // Resetear shadow
+        ctx.shadowBlur = 0;
 
         // Dibujar conexiones
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[j].x - node.x;
-          const dy = (nodes[j].y + (scrollY * nodes[j].depth * 0.5)) - parallaxY;
+          const dy = nodes[j].y - node.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < connectionDistance) {
-            // Glow sutil para las líneas de conexión
             ctx.shadowBlur = 6;
             ctx.shadowColor = '#3B82F6';
             ctx.beginPath();
-            ctx.moveTo(node.x, parallaxY);
-            ctx.lineTo(nodes[j].x, nodes[j].y + (scrollY * nodes[j].depth * 0.5));
-            ctx.strokeStyle = `rgba(30, 64, 175, ${0.3 * (1 - distance / connectionDistance) * node.depth})`;
+            ctx.moveTo(node.x, node.y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.strokeStyle = `rgba(30, 64, 175, ${0.3 * (1 - distance / connectionDistance)})`;
             ctx.stroke();
-            ctx.shadowBlur = 0; // Resetear shadow
+            ctx.shadowBlur = 0;
           }
         }
       });
@@ -93,36 +87,29 @@ export default function NetworkBackground() {
       requestAnimationFrame(animate);
     };
 
-    // Actualizar scroll para parallax
-    const handleScroll = () => {
-      scrollY = window.pageYOffset;
-    };
-    window.addEventListener('scroll', handleScroll);
-
     animate();
 
     // Cleanup
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
     <>
-      {/* Degradado azul neón de fondo - desde abajo hacia arriba */}
+      {/* Degradado azul sutil de fondo - para tema claro */}
       <div
         className="fixed top-0 left-0 w-full h-full pointer-events-none"
         style={{
-          background: 'linear-gradient(to top, rgba(59, 130, 246, 0.25) 0%, transparent 50%)',
+          background: 'linear-gradient(to top, rgba(59, 130, 246, 0.08) 0%, transparent 40%)',
           zIndex: -1
         }}
       />
 
-      {/* Canvas de nodos con efecto neón */}
+      {/* Canvas de nodos con efecto neón - ajustado para fondo claro */}
       <canvas
         ref={canvasRef}
-        className="fixed top-0 left-0 w-full h-full z-0 opacity-45 pointer-events-none"
+        className="fixed top-0 left-0 w-full h-full z-0 opacity-30 pointer-events-none"
       />
     </>
   );

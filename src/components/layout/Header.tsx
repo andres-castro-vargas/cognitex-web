@@ -6,17 +6,18 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLogoHovered, setIsLogoHovered] = useState(false);
 
-  // Estilos con GLASSMORPHISM
+  // Estilos con GLASSMORPHISM - Tema Claro
   const headerStyle: React.CSSProperties = {
     position: 'fixed',
     top: 0,
     width: '100%',
-    background: 'rgba(10, 10, 10, 0.8)', // GLASSMORPHISM
+    background: 'rgba(255, 255, 255, 0.85)', // GLASSMORPHISM claro
     backdropFilter: 'blur(12px)', // GLASSMORPHISM
     WebkitBackdropFilter: 'blur(12px)', // Safari
     zIndex: 1000,
     padding: '1rem 0',
-    borderBottom: '1px solid rgba(30, 64, 175, 0.2)'
+    borderBottom: '1px solid rgba(30, 64, 175, 0.15)',
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
   };
 
   const navStyle: React.CSSProperties = {
@@ -31,7 +32,7 @@ export default function Header() {
     fontFamily: "'Tomorrow', sans-serif",
     fontSize: '1.8rem',
     fontWeight: '700',
-    color: '#ffffff',
+    color: '#1E293B',
     letterSpacing: '1px',
     textDecoration: 'none'
   };
@@ -56,13 +57,13 @@ export default function Header() {
     cursor: 'pointer',
     transition: 'all 0.3s ease',
     transform: isLogoHovered ? 'scale(1.15) rotateY(10deg)' : 'scale(1) rotateY(0deg)',
-    boxShadow: isLogoHovered ? '0 0 20px #3B82F6, 0 0 40px #1E40AF' : 'none'
+    filter: isLogoHovered ? 'drop-shadow(0 0 15px #3B82F6) drop-shadow(0 0 30px #1E40AF)' : 'none'
   };
 
   return (
     <>
       <header style={headerStyle}>
-        {/* Línea neón inferior */}
+        {/* Línea azul inferior - sutil para tema claro */}
         <div
           style={{
             position: 'absolute',
@@ -71,7 +72,7 @@ export default function Header() {
             right: 0,
             height: '2px',
             background: 'linear-gradient(to right, transparent, #3B82F6, transparent)',
-            boxShadow: '0 0 10px #3B82F6, 0 0 20px #3B82F6, 0 0 30px #1E40AF'
+            opacity: 0.6
           }}
         />
 
@@ -129,62 +130,62 @@ export default function Header() {
 
           {/* DERECHA: Menú Desktop */}
           <div className="hidden md:flex items-center justify-end gap-8">
-            <Link to="/" className="text-white hover:text-[#3B82F6] transition-all duration-300 font-medium text-base">
+            <Link to="/" className="text-[#1E293B] hover:text-[#3B82F6] transition-all duration-300 font-medium text-base">
               Inicio
             </Link>
             <Link
               to="/servicios"
               style={{
-                color: '#ffffff',
+                color: '#1E293B',
                 textDecoration: 'none',
                 fontWeight: '500',
                 fontSize: '0.95rem',
                 transition: 'all 0.3s'
               }}
               onMouseEnter={(e) => e.currentTarget.style.color = '#3B82F6'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#ffffff'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#1E293B'}
             >
               Servicios
             </Link>
             <Link
               to="/nosotros"
               style={{
-                color: '#ffffff',
+                color: '#1E293B',
                 textDecoration: 'none',
                 fontWeight: '500',
                 fontSize: '0.95rem',
                 transition: 'all 0.3s'
               }}
               onMouseEnter={(e) => e.currentTarget.style.color = '#3B82F6'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#ffffff'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#1E293B'}
             >
               Nosotros
             </Link>
             <Link
               to="/tienda"
               style={{
-                color: '#ffffff',
+                color: '#1E293B',
                 textDecoration: 'none',
                 fontWeight: '500',
                 fontSize: '0.95rem',
                 transition: 'all 0.3s'
               }}
               onMouseEnter={(e) => e.currentTarget.style.color = '#3B82F6'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#ffffff'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#1E293B'}
             >
               Tienda
             </Link>
             <Link
               to="/contacto"
               style={{
-                color: '#ffffff',
+                color: '#1E293B',
                 textDecoration: 'none',
                 fontWeight: '500',
                 fontSize: '0.95rem',
                 transition: 'all 0.3s'
               }}
               onMouseEnter={(e) => e.currentTarget.style.color = '#3B82F6'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#ffffff'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#1E293B'}
             >
               Contacto
             </Link>
@@ -210,7 +211,7 @@ export default function Header() {
           {/* Botón Menú Móvil */}
           <div className="md:hidden">
             <button
-              className="text-white p-2 hover:bg-white/10 rounded-lg transition-all duration-300 z-[60]"
+              className="text-[#1E293B] p-2 hover:bg-gray-100 rounded-lg transition-all duration-300 z-[60]"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
