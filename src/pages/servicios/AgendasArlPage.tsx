@@ -274,7 +274,7 @@ export default function AgendasArlPage() {
               Agenda una consultoría gratuita
             </a>
             <a
-              href="https://wa.me/573000000000"
+              href="https://wa.me/573124069303"
               target="_blank"
               rel="noopener noreferrer"
               style={ctaButtonSecondaryStyle}

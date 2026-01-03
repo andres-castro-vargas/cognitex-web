@@ -4,6 +4,54 @@ Registro de cambios del sitio web cognitex.co
 
 ---
 
+## [2.1.0] - 2026-01-02
+
+### MEJORAS Y CORRECCIONES - Sesion 2
+
+#### Lucide React Icons
+- Instalado `lucide-react` para iconos profesionales
+- Reemplazados TODOS los emojis por iconos SVG
+- Archivos actualizados:
+  - `PricingCard.tsx`: Check y X icons
+  - `ServiciosPage.tsx`: FileText, Shield, Workflow, ShieldCheck, Check
+  - `AccessModal.tsx`: FileText, Shield, ChevronRight, Lock, X
+  - `ContactoPage.tsx`: Mail, Phone, MapPin, Instagram, Send
+
+#### PricingCard - Alineacion Uniforme
+- Header section con `minHeight: 120px`
+- Features container con `minHeight: 180px`
+- Botones alineados con `marginTop: auto`
+- Lineas divisorias a la misma altura
+
+#### Cambios en Planes
+- **PRO**: Cambiado "Multi-empresa" por "Soporte por email"
+- **Enterprise**: Quitado "Multi-empresa" y "Integraciones personalizadas"
+- **Enterprise**: Agregado "Reportes avanzados" e "Integracion Siigo/Alegra"
+- **Textos CTA**: Trial→"Prueba Gratis", Basico→"Elegir Basico"
+
+#### AccessModal - Hover Sutil
+- Transicion: `all 0.3s ease`
+- Transform: `scale(1.02)` en hover
+- Sombra: `0 8px 25px rgba(30, 64, 175, 0.12)`
+
+#### ContactoPage - Tema Claro
+- Background: `#FFFFFF`
+- Iconos Lucide con contenedor degradado azul
+- NetworkBackground agregado
+- Fuentes reducidas (titulo: 1.75rem-2.25rem)
+
+#### Icono Automatizacion
+- Cambiado de `Settings` a `Workflow` (representa nodos conectados)
+
+#### WhatsApp Corregido
+- Todas las subpaginas actualizadas: `wa.me/573124069303`
+- Archivos: CausacionesPage, ConciliacionDianPage, ConciliacionesBancariasPage, NominaPage, NotasFinancierasPage, AgendasArlPage, DocumentacionSstPage
+
+#### Limpieza
+- Eliminado: `TiendaPage.tsx` (no usado)
+
+---
+
 ## [2.0.0] - 2026-01-02
 
 ### REDISEÑO COMPLETO: Tema Oscuro → Tema Claro

@@ -1,7 +1,7 @@
 # COGNITEX WEB - Documento Maestro
 
-**Versión:** 2.0.0
-**Última actualización:** 2026-01-02
+**Version:** 2.1.0
+**Ultima actualizacion:** 2026-01-02
 **Mantenido por:** Andres Castro (CTO)
 
 ---
@@ -26,7 +26,7 @@ Build Tool:   Vite 6.x
 Styling:      Tailwind CSS + CSS-in-JS (inline styles)
 Routing:      React Router DOM v7
 Fonts:        Google Fonts (Tomorrow, Outfit)
-Icons:        SVG inline
+Icons:        Lucide React + SVG inline
 Deploy:       EasyPanel (Nixpacks)
 ```
 
@@ -76,17 +76,22 @@ Cognitex-Sitio-Web/
 
 ---
 
-## Rutas de la Aplicación
+## Rutas de la Aplicacion
 
-| Ruta | Componente | Descripción |
-|------|------------|-------------|
-| `/` | HomePage | Landing principal con hero y servicios |
-| `/servicios` | ServiciosPage | Planes de precios y opciones |
-| `/nosotros` | NosotrosPage | Información de la empresa |
-| `/contacto` | ContactoPage | Formulario de contacto |
-| `/servicios/causaciones` | CausacionesPage | Servicio específico |
-| `/servicios/conciliacion-dian` | ConciliacionDianPage | Servicio específico |
-| `*` | NotFoundPage | Página 404 |
+| Ruta | Componente | Fondo | Estado |
+|------|------------|-------|--------|
+| `/` | HomePage | BLANCO | Completa |
+| `/servicios` | ServiciosPage | BLANCO | Completa |
+| `/nosotros` | NosotrosPage | NEGRO | Placeholder |
+| `/contacto` | ContactoPage | BLANCO | Completa |
+| `/servicios/causaciones` | CausacionesPage | NEGRO | Contenido completo |
+| `/servicios/conciliacion-dian` | ConciliacionDianPage | NEGRO | Contenido completo |
+| `/servicios/conciliaciones-bancarias` | ConciliacionesBancariasPage | NEGRO | Contenido completo |
+| `/servicios/nomina` | NominaPage | NEGRO | Proximamente Q1 2026 |
+| `/servicios/notas-financieras` | NotasFinancierasPage | NEGRO | Proximamente Q2 2026 |
+| `/servicios/agendas-arl` | AgendasArlPage | NEGRO | Contenido completo |
+| `/servicios/documentacion-sst` | DocumentacionSstPage | NEGRO | Contenido completo |
+| `*` | NotFoundPage | NEGRO | Placeholder |
 
 ---
 
@@ -211,10 +216,9 @@ Importadas en `index.html` desde Google Fonts.
 - TypeScript type-checking con `React.CSSProperties`
 - Hover effects con onMouseEnter/onMouseLeave
 
-### ¿Por qué no se eliminó Tienda?
+### Tienda eliminada
 - La ruta `/tienda` fue eliminada
-- El componente `TiendaPage` todavía existe pero no está en uso
-- Pendiente: Eliminar archivos de tienda si no se usarán
+- El archivo `TiendaPage.tsx` fue eliminado (v2.1.0)
 
 ### ¿Por qué nodos sin parallax?
 - El parallax causaba movimiento excesivo
@@ -225,18 +229,31 @@ Importadas en `index.html` desde Google Fonts.
 
 ## Pendientes y Mejoras Futuras
 
-### Prioridad Alta
+### Prioridad Alta - FASE 2
+- [ ] Migrar 9 paginas de fondo NEGRO a tema BLANCO:
+  - [ ] NosotrosPage
+  - [ ] NotFoundPage
+  - [ ] CausacionesPage
+  - [ ] ConciliacionDianPage
+  - [ ] ConciliacionesBancariasPage
+  - [ ] NominaPage
+  - [ ] NotasFinancierasPage
+  - [ ] AgendasArlPage
+  - [ ] DocumentacionSstPage
+- [ ] Completar contenido de NosotrosPage (actualmente placeholder)
+
+### Prioridad Alta - Funcionalidad
 - [ ] Implementar formulario de contacto funcional con n8n
 - [ ] Conectar planes con registro real en appcontadores
 - [ ] Agregar Google Analytics / Meta Pixel
 
 ### Prioridad Media
-- [ ] Crear subpáginas de servicios individuales
-- [ ] Agregar sección de testimonios/casos de éxito
-- [ ] Optimizar imágenes y lazy loading
+- [ ] Agregar seccion de testimonios/casos de exito
+- [ ] Optimizar imagenes y lazy loading
+- [ ] Revisar links de Calendar (actualmente google.com placeholder)
 
 ### Prioridad Baja
-- [ ] Blog o sección de recursos
+- [ ] Blog o seccion de recursos
 - [ ] Calculadora de ROI
 - [ ] Dark mode toggle
 
@@ -289,9 +306,10 @@ npm run lint
 
 ## Historial de Versiones
 
-| Versión | Fecha | Cambios Principales |
+| Version | Fecha | Cambios Principales |
 |---------|-------|---------------------|
-| 2.0.0 | 2026-01-02 | Tema claro, reestructuración navegación, página servicios |
-| 1.0.0 | Nov 2025 | Migración de HTML estático a React |
+| 2.1.0 | 2026-01-02 | Lucide icons, alineacion cards, WhatsApp corregido, TiendaPage eliminado |
+| 2.0.0 | 2026-01-02 | Tema claro, reestructuracion navegacion, pagina servicios |
+| 1.0.0 | Nov 2025 | Migracion de HTML estatico a React |
 
 Ver `CHANGELOG.md` para detalles completos.

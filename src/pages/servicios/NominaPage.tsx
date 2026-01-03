@@ -137,7 +137,7 @@ export default function NominaPage() {
               Quiero ser de los primeros
             </a>
             <a
-              href="https://wa.me/573000000000"
+              href="https://wa.me/573124069303"
               target="_blank"
               rel="noopener noreferrer"
               style={ctaButtonSecondaryStyle}
