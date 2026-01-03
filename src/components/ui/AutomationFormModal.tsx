@@ -4,7 +4,7 @@ import {
   User, Users, Building, Landmark,
   TrendingUp, Megaphone, Settings, DollarSign, UserCheck,
   CheckCircle, ArrowRight, ArrowLeft,
-  Calculator, ShieldCheck, Receipt, ClipboardCheck
+  Calculator, ShieldCheck, Receipt, ClipboardCheck, AlertCircle
 } from 'lucide-react';
 
 interface FormData {
@@ -37,6 +37,7 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   // Block body scroll when modal is open
   useEffect(() => {
@@ -73,6 +74,7 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
         phone: ''
       });
       setIsSuccess(false);
+      setIsError(false);
     }
   }, [isOpen]);
 
@@ -154,9 +156,8 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
         })
       });
       setIsSuccess(true);
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setIsSuccess(true); // Show success anyway for UX
+    } catch {
+      setIsError(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -387,8 +388,53 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
     color: '#10B981'
   };
 
+  const errorIconStyle: React.CSSProperties = {
+    width: '80px',
+    height: '80px',
+    background: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '0 auto 1.5rem',
+    boxShadow: '0 0 30px rgba(239, 68, 68, 0.4)'
+  };
+
   // Render current step
   const renderStep = () => {
+    if (isError) {
+      return (
+        <div style={resultContainerStyle}>
+          <div style={errorIconStyle}>
+            <AlertCircle size={40} color="#FFFFFF" />
+          </div>
+          <h2 style={titleStyle}>Hubo un problema</h2>
+          <p style={{ ...subtitleStyle, marginBottom: '1.5rem' }}>
+            No pudimos enviar tu información. Por favor intenta de nuevo o contáctanos directamente por WhatsApp.
+          </p>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button
+              style={{...buttonNextStyle, background: '#175197', opacity: 1, cursor: 'pointer'}}
+              onClick={() => {
+                setIsError(false);
+                setCurrentStep(4);
+              }}
+            >
+              Intentar de nuevo
+            </button>
+            <a
+              href="https://wa.me/573124069303"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{...buttonNextStyle, background: '#25D366', opacity: 1, cursor: 'pointer', textDecoration: 'none'}}
+            >
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      );
+    }
+
     if (isSuccess) {
       return (
         <div style={resultContainerStyle}>

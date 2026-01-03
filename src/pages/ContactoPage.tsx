@@ -23,8 +23,7 @@ export default function ContactoPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implementar envío de formulario
-    console.log('Formulario enviado:', formData);
+    // TODO: Implementar envío de formulario con n8n
   };
 
   // Estilos - Tema Claro
