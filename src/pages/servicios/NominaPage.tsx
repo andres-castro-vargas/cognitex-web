@@ -1,152 +1,178 @@
+import { Clock, Bell } from 'lucide-react';
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
+import NetworkBackground from '../../components/ui/NetworkBackground';
 
 export default function NominaPage() {
   const pageStyle: React.CSSProperties = {
-    background: '#0A0A0A',
     minHeight: '100vh',
-    color: '#ffffff'
+    background: '#FFFFFF',
+    position: 'relative'
   };
 
-  const bannerStyle: React.CSSProperties = {
+  const badgeStyle: React.CSSProperties = {
+    display: 'inline-block',
     background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
-    padding: '1.5rem 2rem',
-    textAlign: 'center',
-    fontSize: '1.1rem',
-    fontWeight: '600',
-    color: '#1F2937'
+    color: '#1F2937',
+    padding: '0.5rem 1.5rem',
+    borderRadius: '50px',
+    fontSize: '0.9rem',
+    fontWeight: '700',
+    marginBottom: '1.5rem',
+    position: 'relative',
+    zIndex: 10
   };
 
   const heroStyle: React.CSSProperties = {
+    paddingTop: '140px',
+    paddingBottom: '2rem',
     textAlign: 'center',
-    padding: '6rem 2rem 4rem',
-    maxWidth: '900px',
-    margin: '0 auto'
+    position: 'relative',
+    zIndex: 10,
+    maxWidth: '800px',
+    margin: '0 auto',
+    padding: '140px 2rem 2rem'
   };
 
-  const h1Style: React.CSSProperties = {
-    fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+  const titleStyle: React.CSSProperties = {
+    fontSize: 'clamp(2rem, 5vw, 3rem)',
     fontWeight: '700',
-    background: 'linear-gradient(135deg, #ffffff 0%, #3B82F6 100%)',
+    fontFamily: "'Tomorrow', sans-serif",
+    background: 'linear-gradient(135deg, #1E293B 0%, #3B82F6 100%)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
-    marginBottom: '1.5rem',
+    marginBottom: '1rem',
     lineHeight: '1.2'
   };
 
   const subtitleStyle: React.CSSProperties = {
-    fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
-    color: '#9CA3AF',
-    lineHeight: '1.6',
-    maxWidth: '700px',
-    margin: '0 auto 3rem'
+    fontSize: '1.15rem',
+    color: '#64748B',
+    maxWidth: '600px',
+    margin: '0 auto 2rem'
   };
 
   const contentStyle: React.CSSProperties = {
-    padding: '4rem 2rem',
-    maxWidth: '900px',
-    margin: '0 auto'
+    padding: '2rem',
+    maxWidth: '700px',
+    margin: '0 auto',
+    position: 'relative',
+    zIndex: 10
   };
 
-  const descriptionStyle: React.CSSProperties = {
-    fontSize: '1.1rem',
-    color: '#D1D5DB',
+  const cardStyle: React.CSSProperties = {
+    background: '#F8FAFC',
+    padding: '2.5rem',
+    borderRadius: '20px',
+    border: '1px solid #E2E8F0',
+    textAlign: 'center',
+    marginBottom: '2rem'
+  };
+
+  const descStyle: React.CSSProperties = {
+    fontSize: '1.05rem',
+    color: '#475569',
     lineHeight: '1.8',
-    marginBottom: '3rem'
+    marginBottom: '1.5rem'
+  };
+
+  const featureStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '0.75rem',
+    color: '#1E293B',
+    fontSize: '1rem',
+    fontWeight: '500',
+    marginBottom: '0.75rem'
   };
 
   const ctaSectionStyle: React.CSSProperties = {
     background: 'linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)',
-    padding: '4rem 2rem',
+    padding: '3rem 2rem',
     textAlign: 'center',
-    borderRadius: '20px',
-    margin: '4rem 2rem'
+    borderRadius: '24px',
+    margin: '2rem',
+    position: 'relative',
+    zIndex: 10
   };
 
-  const ctaButtonStyle: React.CSSProperties = {
+  const ctaTitleStyle: React.CSSProperties = {
+    fontSize: 'clamp(1.25rem, 3vw, 1.75rem)',
+    fontWeight: '700',
+    color: '#FFFFFF',
+    marginBottom: '1.5rem',
+    fontFamily: "'Tomorrow', sans-serif"
+  };
+
+  const ctaButtonWhiteStyle: React.CSSProperties = {
     display: 'inline-block',
-    background: '#ffffff',
-    color: '#1E40AF',
     padding: '1rem 2.5rem',
+    background: '#FFFFFF',
+    color: '#1E40AF',
     borderRadius: '12px',
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     fontWeight: '600',
     textDecoration: 'none',
-    margin: '1rem',
     transition: 'all 0.3s',
-    border: '2px solid #ffffff'
-  };
-
-  const ctaButtonSecondaryStyle: React.CSSProperties = {
-    ...ctaButtonStyle,
-    background: 'transparent',
-    color: '#ffffff',
-    border: '2px solid #ffffff'
+    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)'
   };
 
   return (
     <>
-      <Header />
-      <main style={pageStyle}>
-        {/* BANNER PRÓXIMAMENTE */}
-        <div style={bannerStyle}>
-          PRÓXIMAMENTE - Disponible Q1 2026
+      <div style={pageStyle}>
+        <NetworkBackground />
+        <Header />
+
+        <section style={heroStyle}>
+          <div style={badgeStyle}>Proximamente Q1 2026</div>
+          <h1 style={titleStyle}>Valida nomina y seguridad social en minutos</h1>
+          <p style={subtitleStyle}>
+            Automatiza la verificacion de nomina electronica y cruza datos con seguridad social.
+          </p>
+        </section>
+
+        <div style={contentStyle}>
+          <div style={cardStyle}>
+            <p style={descStyle}>
+              Esta solucion te permitira validar automaticamente que todos los empleados en tu nomina electronica coincidan con los registros de seguridad social.
+            </p>
+            <p style={descStyle}>
+              Reduce de 1.5-2 horas por cada 10 empleados a solo 10 minutos de revision.
+            </p>
+
+            <div style={{ marginTop: '2rem' }}>
+              <div style={featureStyle}>
+                <Clock size={20} color="#1E40AF" />
+                <span>Validacion automatica de afiliaciones</span>
+              </div>
+              <div style={featureStyle}>
+                <Clock size={20} color="#1E40AF" />
+                <span>Deteccion de inconsistencias en aportes</span>
+              </div>
+              <div style={featureStyle}>
+                <Clock size={20} color="#1E40AF" />
+                <span>Reportes listos para revision</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* HERO */}
-        <section style={heroStyle}>
-          <h1 style={h1Style}>Valida nómina y seguridad social en minutos</h1>
-          <p style={subtitleStyle}>
-            Automatiza la verificación de nómina electrónica y cruza datos con seguridad social
-          </p>
-        </section>
-
-        {/* DESCRIPCIÓN BREVE */}
-        <section style={contentStyle}>
-          <p style={descriptionStyle}>
-            Esta solución te permitirá validar automáticamente que todos los empleados en tu nómina electrónica
-            coincidan con los registros de seguridad social, detectando inconsistencias, empleados sin afiliación
-            y errores en aportes.
-          </p>
-          <p style={descriptionStyle}>
-            Reduce de 1.5-2 horas por cada 10 empleados a solo 10 minutos de revisión, eliminando el trabajo
-            manual de comparación entre múltiples sistemas.
-          </p>
-          <p style={descriptionStyle}>
-            <strong>¿Por qué aún no está disponible?</strong> Estamos perfeccionando la integración con las diferentes
-            administradoras de seguridad social para garantizar precisión del 100% en las validaciones.
-          </p>
-        </section>
-
-        {/* CTA */}
         <section style={ctaSectionStyle}>
-          <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: '700', color: '#ffffff', marginBottom: '1rem' }}>
-            Quiero ser de los primeros en probarlo
-          </h2>
-          <p style={{ fontSize: '1.2rem', color: '#E5E7EB', marginBottom: '2rem' }}>
-            Regístrate y te avisaremos cuando esté listo
-          </p>
-          <div>
-            <a
-              href="https://calendar.google.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={ctaButtonStyle}
-            >
-              Quiero ser de los primeros
-            </a>
-            <a
-              href="https://wa.me/573124069303"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={ctaButtonSecondaryStyle}
-            >
-              Escríbenos por WhatsApp
-            </a>
-          </div>
+          <h2 style={ctaTitleStyle}>¿Quieres ser de los primeros en probarlo?</h2>
+          <a
+            href="https://wa.me/573124069303?text=Hola,%20quiero%20que%20me%20notifiquen%20cuando%20este%20disponible%20la%20automatizacion%20de%20Nomina"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={ctaButtonWhiteStyle}
+          >
+            <Bell size={18} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} />
+            Notificame cuando este listo
+          </a>
         </section>
-      </main>
+      </div>
+
       <Footer />
     </>
   );

@@ -1,300 +1,329 @@
+import { AlertCircle, Clock, FileX, Upload, Brain, FileCheck, Zap, TrendingUp, Shield } from 'lucide-react';
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
+import NetworkBackground from '../../components/ui/NetworkBackground';
 
 export default function CausacionesPage() {
+  // Estilos - Tema Claro
   const pageStyle: React.CSSProperties = {
-    background: '#0A0A0A',
     minHeight: '100vh',
-    color: '#ffffff'
+    background: '#FFFFFF',
+    position: 'relative'
+  };
+
+  const heroStyle: React.CSSProperties = {
+    paddingTop: '140px',
+    paddingBottom: '4rem',
+    textAlign: 'center',
+    position: 'relative',
+    zIndex: 10,
+    maxWidth: '900px',
+    margin: '0 auto',
+    padding: '140px 2rem 4rem'
+  };
+
+  const titleStyle: React.CSSProperties = {
+    fontSize: 'clamp(2rem, 5vw, 3rem)',
+    fontWeight: '700',
+    fontFamily: "'Tomorrow', sans-serif",
+    background: 'linear-gradient(135deg, #1E293B 0%, #3B82F6 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    marginBottom: '1rem',
+    lineHeight: '1.2'
+  };
+
+  const subtitleStyle: React.CSSProperties = {
+    fontSize: '1.15rem',
+    color: '#64748B',
+    maxWidth: '600px',
+    margin: '0 auto 2rem'
+  };
+
+  const ctaButtonStyle: React.CSSProperties = {
+    display: 'inline-block',
+    padding: '1rem 2.5rem',
+    background: 'linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)',
+    color: '#FFFFFF',
+    borderRadius: '12px',
+    fontSize: '1rem',
+    fontWeight: '600',
+    textDecoration: 'none',
+    transition: 'all 0.3s',
+    boxShadow: '0 10px 25px rgba(30, 64, 175, 0.25)'
   };
 
   const sectionStyle: React.CSSProperties = {
     padding: '4rem 2rem',
-    maxWidth: '1200px',
-    margin: '0 auto'
+    maxWidth: '1000px',
+    margin: '0 auto',
+    position: 'relative',
+    zIndex: 10
   };
 
-  const heroStyle: React.CSSProperties = {
-    textAlign: 'center',
-    padding: '6rem 2rem 4rem',
-    maxWidth: '900px',
-    margin: '0 auto'
-  };
-
-  const h1Style: React.CSSProperties = {
-    fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+  const sectionTitleStyle: React.CSSProperties = {
+    fontSize: '1.75rem',
     fontWeight: '700',
-    background: 'linear-gradient(135deg, #ffffff 0%, #3B82F6 100%)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text',
-    marginBottom: '1.5rem',
-    lineHeight: '1.2'
-  };
-
-  const h2Style: React.CSSProperties = {
-    fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-    fontWeight: '700',
+    color: '#1E293B',
     marginBottom: '2rem',
-    color: '#ffffff'
+    textAlign: 'center',
+    fontFamily: "'Tomorrow', sans-serif"
   };
 
-  const subtitleStyle: React.CSSProperties = {
-    fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
-    color: '#9CA3AF',
-    lineHeight: '1.6',
-    maxWidth: '700px',
-    margin: '0 auto'
-  };
-
-  const listStyle: React.CSSProperties = {
-    listStyle: 'none',
-    padding: '0',
-    margin: '2rem 0'
-  };
-
-  const listItemStyle: React.CSSProperties = {
-    padding: '1rem 0',
-    fontSize: '1.1rem',
-    color: '#D1D5DB',
-    lineHeight: '1.6',
+  const problemCardStyle: React.CSSProperties = {
     display: 'flex',
-    alignItems: 'flex-start',
-    gap: '1rem'
+    alignItems: 'center',
+    gap: '1rem',
+    padding: '1rem 1.5rem',
+    background: '#FEF2F2',
+    borderRadius: '12px',
+    marginBottom: '1rem',
+    border: '1px solid #FECACA'
   };
 
-  const iconStyle: React.CSSProperties = {
-    minWidth: '24px',
-    minHeight: '24px',
-    marginTop: '0.2rem'
+  const problemTextStyle: React.CSSProperties = {
+    fontSize: '1rem',
+    color: '#991B1B',
+    fontWeight: '500'
   };
 
   const stepsContainerStyle: React.CSSProperties = {
     display: 'grid',
-    gap: '1.5rem',
-    margin: '2rem 0'
+    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+    gap: '1.5rem'
   };
 
-  const stepStyle: React.CSSProperties = {
-    background: 'linear-gradient(135deg, #1F2937 0%, #374151 100%)',
-    padding: '1.5rem',
-    borderRadius: '12px',
-    border: '1px solid #374151'
+  const stepCardStyle: React.CSSProperties = {
+    background: '#FFFFFF',
+    padding: '2rem',
+    borderRadius: '16px',
+    border: '1px solid #E2E8F0',
+    textAlign: 'center',
+    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.05)'
   };
 
   const stepNumberStyle: React.CSSProperties = {
+    width: '48px',
+    height: '48px',
     background: 'linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)',
-    color: '#ffffff',
-    width: '40px',
-    height: '40px',
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: '0 auto 1rem',
+    color: '#FFFFFF',
     fontWeight: '700',
-    marginBottom: '1rem',
-    fontSize: '1.2rem'
+    fontSize: '1.25rem'
+  };
+
+  const stepTitleStyle: React.CSSProperties = {
+    fontSize: '1.1rem',
+    fontWeight: '600',
+    color: '#1E293B',
+    marginBottom: '0.5rem'
+  };
+
+  const stepDescStyle: React.CSSProperties = {
+    fontSize: '0.9rem',
+    color: '#64748B',
+    lineHeight: '1.5'
+  };
+
+  const benefitsContainerStyle: React.CSSProperties = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+    gap: '1.5rem'
+  };
+
+  const benefitCardStyle: React.CSSProperties = {
+    background: '#F8FAFC',
+    padding: '1.5rem',
+    borderRadius: '12px',
+    border: '1px solid #E2E8F0',
+    textAlign: 'center'
+  };
+
+  const benefitIconStyle: React.CSSProperties = {
+    width: '44px',
+    height: '44px',
+    background: 'linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)',
+    borderRadius: '10px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '0 auto 1rem'
+  };
+
+  const benefitTitleStyle: React.CSSProperties = {
+    fontSize: '1rem',
+    fontWeight: '600',
+    color: '#1E293B',
+    marginBottom: '0.35rem'
+  };
+
+  const benefitDescStyle: React.CSSProperties = {
+    fontSize: '0.85rem',
+    color: '#64748B'
   };
 
   const ctaSectionStyle: React.CSSProperties = {
     background: 'linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)',
     padding: '4rem 2rem',
     textAlign: 'center',
-    borderRadius: '20px',
-    margin: '4rem 2rem'
+    borderRadius: '24px',
+    margin: '2rem',
+    position: 'relative',
+    zIndex: 10
   };
 
-  const ctaButtonStyle: React.CSSProperties = {
+  const ctaTitleStyle: React.CSSProperties = {
+    fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+    fontWeight: '700',
+    color: '#FFFFFF',
+    marginBottom: '1.5rem',
+    fontFamily: "'Tomorrow', sans-serif"
+  };
+
+  const ctaButtonWhiteStyle: React.CSSProperties = {
     display: 'inline-block',
-    background: '#ffffff',
-    color: '#1E40AF',
     padding: '1rem 2.5rem',
+    background: '#FFFFFF',
+    color: '#1E40AF',
     borderRadius: '12px',
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     fontWeight: '600',
     textDecoration: 'none',
-    margin: '1rem',
     transition: 'all 0.3s',
-    border: '2px solid #ffffff'
+    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)'
   };
-
-  const ctaButtonSecondaryStyle: React.CSSProperties = {
-    ...ctaButtonStyle,
-    background: 'transparent',
-    color: '#ffffff',
-    border: '2px solid #ffffff'
-  };
-
-  const noteStyle: React.CSSProperties = {
-    background: '#FEF3C7',
-    color: '#92400E',
-    padding: '1.5rem',
-    borderRadius: '12px',
-    marginTop: '2rem',
-    fontSize: '0.95rem',
-    lineHeight: '1.6',
-    fontWeight: '500',
-    borderLeft: '4px solid #F59E0B'
-  };
-
-  const CheckIcon = () => (
-    <svg style={iconStyle} fill="none" viewBox="0 0 24 24" stroke="#3B82F6" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-    </svg>
-  );
-
-  const AlertIcon = () => (
-    <svg style={iconStyle} fill="none" viewBox="0 0 24 24" stroke="#F59E0B" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-    </svg>
-  );
 
   return (
     <>
-      <Header />
-      <main style={pageStyle}>
+      <div style={pageStyle}>
+        <NetworkBackground />
+        <Header />
+
         {/* HERO */}
         <section style={heroStyle}>
-          <h1 style={h1Style}>Dile adiós a la digitación manual de facturas</h1>
+          <h1 style={titleStyle}>Automatiza tus causaciones en minutos</h1>
           <p style={subtitleStyle}>
-            Automatiza la causación de facturas electrónicas y recupera 15-20 horas al mes que tu equipo pierde digitando
+            De 4-5 minutos por factura a solo 10 segundos. Deja de digitar y empieza a revisar.
           </p>
+          <a
+            href="https://wa.me/573124069303?text=Hola,%20quiero%20una%20demo%20de%20Causaciones%20Automatizadas"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={ctaButtonStyle}
+          >
+            Agendar Demo Gratis
+          </a>
         </section>
 
-        {/* EL DOLOR */}
+        {/* PROBLEMA */}
         <section style={sectionStyle}>
-          <h2 style={h2Style}>¿Te suena familiar?</h2>
-          <ul style={listStyle}>
-            <li style={listItemStyle}>
-              <AlertIcon />
-              <span>¿Tu equipo dedica horas digitando facturas una por una en el software contable?</span>
-            </li>
-            <li style={listItemStyle}>
-              <AlertIcon />
-              <span>¿Tus auxiliares cometen errores constantes al registrar cuentas PUC?</span>
-            </li>
-            <li style={listItemStyle}>
-              <AlertIcon />
-              <span>¿Los lunes después del fin de semana se olvidan de las reglas fiscales básicas?</span>
-            </li>
-          </ul>
+          <h2 style={sectionTitleStyle}>¿Te suena familiar?</h2>
+
+          <div style={problemCardStyle}>
+            <AlertCircle size={24} color="#DC2626" />
+            <span style={problemTextStyle}>Tu equipo pasa horas digitando facturas una por una</span>
+          </div>
+
+          <div style={problemCardStyle}>
+            <Clock size={24} color="#DC2626" />
+            <span style={problemTextStyle}>Los errores de digitacion generan reprocesos constantes</span>
+          </div>
+
+          <div style={problemCardStyle}>
+            <FileX size={24} color="#DC2626" />
+            <span style={problemTextStyle}>Las cuentas PUC se asignan incorrectamente cada semana</span>
+          </div>
         </section>
 
-        {/* CÓMO FUNCIONA */}
+        {/* SOLUCION */}
         <section style={sectionStyle}>
-          <h2 style={h2Style}>Cómo funciona</h2>
+          <h2 style={sectionTitleStyle}>Asi lo resolvemos</h2>
+
           <div style={stepsContainerStyle}>
-            <div style={stepStyle}>
-              <div style={stepNumberStyle}>1</div>
-              <h3 style={{ fontSize: '1.3rem', fontWeight: '600', marginBottom: '0.5rem' }}>
-                Descarga automática desde DIAN
-              </h3>
-              <p style={{ color: '#9CA3AF', lineHeight: '1.6' }}>
-                Conectamos con la DIAN sin necesidad de tokens manuales. Tus facturas electrónicas se descargan automáticamente.
-              </p>
+            <div style={stepCardStyle}>
+              <div style={stepNumberStyle}>
+                <Upload size={24} />
+              </div>
+              <h3 style={stepTitleStyle}>Descarga automatica</h3>
+              <p style={stepDescStyle}>Conectamos con DIAN y descargamos tus facturas automaticamente</p>
             </div>
 
-            <div style={stepStyle}>
-              <div style={stepNumberStyle}>2</div>
-              <h3 style={{ fontSize: '1.3rem', fontWeight: '600', marginBottom: '0.5rem' }}>
-                Clasificación inteligente de cuentas PUC
-              </h3>
-              <p style={{ color: '#9CA3AF', lineHeight: '1.6' }}>
-                Nuestro sistema aprende de tus reglas contables y clasifica cada factura con el PUC correcto progresivamente.
-              </p>
+            <div style={stepCardStyle}>
+              <div style={stepNumberStyle}>
+                <Brain size={24} />
+              </div>
+              <h3 style={stepTitleStyle}>Clasificacion inteligente</h3>
+              <p style={stepDescStyle}>El sistema aprende tus reglas y asigna el PUC correcto</p>
             </div>
 
-            <div style={stepStyle}>
-              <div style={stepNumberStyle}>3</div>
-              <h3 style={{ fontSize: '1.3rem', fontWeight: '600', marginBottom: '0.5rem' }}>
-                Generación de archivos planos
-              </h3>
-              <p style={{ color: '#9CA3AF', lineHeight: '1.6' }}>
-                Obtienes archivos listos para importar directamente a tu software contable. Sin digitación, sin errores.
-              </p>
+            <div style={stepCardStyle}>
+              <div style={stepNumberStyle}>
+                <FileCheck size={24} />
+              </div>
+              <h3 style={stepTitleStyle}>Archivos listos</h3>
+              <p style={stepDescStyle}>Obtienes archivos planos para importar a tu software contable</p>
             </div>
           </div>
         </section>
 
         {/* BENEFICIOS */}
         <section style={sectionStyle}>
-          <h2 style={h2Style}>Resultados que puedes esperar</h2>
-          <ul style={listStyle}>
-            <li style={listItemStyle}>
-              <CheckIcon />
-              <span><strong>Ahorra 15-20 horas al mes</strong> en digitación manual</span>
-            </li>
-            <li style={listItemStyle}>
-              <CheckIcon />
-              <span><strong>Elimina errores de digitación</strong> con precisión del 99%</span>
-            </li>
-            <li style={listItemStyle}>
-              <CheckIcon />
-              <span><strong>Clasificación PUC automática</strong> que aprende de tus reglas</span>
-            </li>
-            <li style={listItemStyle}>
-              <CheckIcon />
-              <span><strong>Compatible</strong> con Siigo, World Office, Alegra y más</span>
-            </li>
-            <li style={listItemStyle}>
-              <CheckIcon />
-              <span><strong>El contador siempre revisa el 100%</strong> antes de finalizar</span>
-            </li>
-          </ul>
+          <h2 style={sectionTitleStyle}>Lo que ganas</h2>
 
-          <div style={noteStyle}>
-            <strong>Nota importante:</strong> Esta automatización NO incluye cálculo de retenciones (requiere criterio contable especializado).
-            Incluye la causación base que representa el 80% del trabajo operativo.
+          <div style={benefitsContainerStyle}>
+            <div style={benefitCardStyle}>
+              <div style={benefitIconStyle}>
+                <Clock size={22} color="#FFFFFF" />
+              </div>
+              <h4 style={benefitTitleStyle}>15-20 horas/mes</h4>
+              <p style={benefitDescStyle}>Tiempo recuperado en digitacion</p>
+            </div>
+
+            <div style={benefitCardStyle}>
+              <div style={benefitIconStyle}>
+                <Zap size={22} color="#FFFFFF" />
+              </div>
+              <h4 style={benefitTitleStyle}>99% precision</h4>
+              <p style={benefitDescStyle}>Elimina errores de transcripcion</p>
+            </div>
+
+            <div style={benefitCardStyle}>
+              <div style={benefitIconStyle}>
+                <TrendingUp size={22} color="#FFFFFF" />
+              </div>
+              <h4 style={benefitTitleStyle}>3x mas clientes</h4>
+              <p style={benefitDescStyle}>Capacidad para crecer sin contratar</p>
+            </div>
+
+            <div style={benefitCardStyle}>
+              <div style={benefitIconStyle}>
+                <Shield size={22} color="#FFFFFF" />
+              </div>
+              <h4 style={benefitTitleStyle}>Tu revision</h4>
+              <p style={benefitDescStyle}>El contador siempre valida el 100%</p>
+            </div>
           </div>
-        </section>
-
-        {/* IDEAL PARA */}
-        <section style={sectionStyle}>
-          <h2 style={h2Style}>Ideal para</h2>
-          <ul style={listStyle}>
-            <li style={listItemStyle}>
-              <CheckIcon />
-              <span>Contadores con 300+ facturas mensuales</span>
-            </li>
-            <li style={listItemStyle}>
-              <CheckIcon />
-              <span>Firmas contables con múltiples clientes</span>
-            </li>
-            <li style={listItemStyle}>
-              <CheckIcon />
-              <span>Empresas que procesan alto volumen de compras</span>
-            </li>
-          </ul>
         </section>
 
         {/* CTA FINAL */}
         <section style={ctaSectionStyle}>
-          <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: '700', color: '#ffffff', marginBottom: '1rem' }}>
-            ¿Te identificas con esto?
-          </h2>
-          <p style={{ fontSize: '1.2rem', color: '#E5E7EB', marginBottom: '2rem' }}>
-            Hablemos sobre cómo podemos ayudarte
-          </p>
-          <div>
-            <a
-              href="https://calendar.google.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={ctaButtonStyle}
-            >
-              Agenda una consultoría gratuita
-            </a>
-            <a
-              href="https://wa.me/573124069303"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={ctaButtonSecondaryStyle}
-            >
-              Escríbenos por WhatsApp
-            </a>
-          </div>
+          <h2 style={ctaTitleStyle}>¿Listo para automatizar tus causaciones?</h2>
+          <a
+            href="https://wa.me/573124069303?text=Hola,%20quiero%20hablar%20con%20un%20experto%20sobre%20Causaciones"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={ctaButtonWhiteStyle}
+          >
+            Hablar con nuestro equipo
+          </a>
         </section>
-      </main>
+      </div>
+
       <Footer />
     </>
   );
