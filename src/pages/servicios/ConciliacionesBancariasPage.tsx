@@ -1,9 +1,13 @@
-import { AlertCircle, Clock, FileX, Search, GitCompare, FileCheck, Zap, TrendingUp, Shield, CheckCircle } from 'lucide-react';
+import { useState } from 'react';
+import { AlertCircle, Clock, FileX, Search, GitCompare, FileCheck, Zap, TrendingUp, CheckCircle } from 'lucide-react';
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import NetworkBackground from '../../components/ui/NetworkBackground';
 
 export default function ConciliacionesBancariasPage() {
+  const [isHeroCtaHovered, setIsHeroCtaHovered] = useState(false);
+  const [isFinalCtaHovered, setIsFinalCtaHovered] = useState(false);
+
   const pageStyle: React.CSSProperties = {
     minHeight: '100vh',
     background: '#FFFFFF',
@@ -49,8 +53,11 @@ export default function ConciliacionesBancariasPage() {
     fontSize: '1rem',
     fontWeight: '600',
     textDecoration: 'none',
-    transition: 'all 0.3s',
-    boxShadow: '0 10px 25px rgba(30, 64, 175, 0.25)'
+    transition: 'all 0.3s ease',
+    boxShadow: isHeroCtaHovered
+      ? '0 15px 35px rgba(30, 64, 175, 0.35)'
+      : '0 10px 25px rgba(30, 64, 175, 0.25)',
+    transform: isHeroCtaHovered ? 'scale(1.05)' : 'scale(1)'
   };
 
   const sectionStyle: React.CSSProperties = {
@@ -129,8 +136,10 @@ export default function ConciliacionesBancariasPage() {
 
   const benefitsContainerStyle: React.CSSProperties = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-    gap: '1.5rem'
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gap: '1.5rem',
+    maxWidth: '600px',
+    margin: '0 auto'
   };
 
   const benefitCardStyle: React.CSSProperties = {
@@ -191,8 +200,11 @@ export default function ConciliacionesBancariasPage() {
     fontSize: '1rem',
     fontWeight: '600',
     textDecoration: 'none',
-    transition: 'all 0.3s',
-    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)'
+    transition: 'all 0.3s ease',
+    boxShadow: isFinalCtaHovered
+      ? '0 15px 35px rgba(0, 0, 0, 0.25)'
+      : '0 10px 25px rgba(0, 0, 0, 0.15)',
+    transform: isFinalCtaHovered ? 'scale(1.05)' : 'scale(1)'
   };
 
   return (
@@ -202,7 +214,7 @@ export default function ConciliacionesBancariasPage() {
         <Header />
 
         <section style={heroStyle}>
-          <h1 style={titleStyle}>Reconcilia bancos automaticamente</h1>
+          <h1 style={titleStyle}>Conciliación Bancaria Automática</h1>
           <p style={subtitleStyle}>
             De 4-5 horas semanales a solo 30 minutos. Acaba con el descuadre bancario eterno.
           </p>
@@ -211,6 +223,8 @@ export default function ConciliacionesBancariasPage() {
             target="_blank"
             rel="noopener noreferrer"
             style={ctaButtonStyle}
+            onMouseEnter={() => setIsHeroCtaHovered(true)}
+            onMouseLeave={() => setIsHeroCtaHovered(false)}
           >
             Agendar Demo Gratis
           </a>
@@ -236,7 +250,7 @@ export default function ConciliacionesBancariasPage() {
         </section>
 
         <section style={sectionStyle}>
-          <h2 style={sectionTitleStyle}>Asi lo resolvemos</h2>
+          <h2 style={sectionTitleStyle}>Así lo resolvemos</h2>
 
           <div style={stepsContainerStyle}>
             <div style={stepCardStyle}>
@@ -244,14 +258,14 @@ export default function ConciliacionesBancariasPage() {
                 <Search size={24} />
               </div>
               <h3 style={stepTitleStyle}>Emparejamiento inteligente</h3>
-              <p style={stepDescStyle}>Comparamos extractos bancarios con registros contables automaticamente</p>
+              <p style={stepDescStyle}>Comparamos extractos bancarios con registros contables automáticamente</p>
             </div>
 
             <div style={stepCardStyle}>
               <div style={stepNumberStyle}>
                 <GitCompare size={24} />
               </div>
-              <h3 style={stepTitleStyle}>Deteccion de errores</h3>
+              <h3 style={stepTitleStyle}>Detección de errores</h3>
               <p style={stepDescStyle}>Identificamos duplicados, faltantes y diferencias de montos</p>
             </div>
 
@@ -259,7 +273,7 @@ export default function ConciliacionesBancariasPage() {
               <div style={stepNumberStyle}>
                 <FileCheck size={24} />
               </div>
-              <h3 style={stepTitleStyle}>Sugerencias de correccion</h3>
+              <h3 style={stepTitleStyle}>Sugerencias de corrección</h3>
               <p style={stepDescStyle}>El sistema sugiere correcciones para partidas sin conciliar</p>
             </div>
           </div>
@@ -274,15 +288,15 @@ export default function ConciliacionesBancariasPage() {
                 <Clock size={22} color="#FFFFFF" />
               </div>
               <h4 style={benefitTitleStyle}>16-20 horas/mes</h4>
-              <p style={benefitDescStyle}>Tiempo recuperado en conciliacion</p>
+              <p style={benefitDescStyle}>Tiempo recuperado en conciliación</p>
             </div>
 
             <div style={benefitCardStyle}>
               <div style={benefitIconStyle}>
                 <CheckCircle size={22} color="#FFFFFF" />
               </div>
-              <h4 style={benefitTitleStyle}>80% automatico</h4>
-              <p style={benefitDescStyle}>Descuadres resueltos sin intervencion</p>
+              <h4 style={benefitTitleStyle}>80% automático</h4>
+              <p style={benefitDescStyle}>Descuadres resueltos sin intervención</p>
             </div>
 
             <div style={benefitCardStyle}>
@@ -290,7 +304,7 @@ export default function ConciliacionesBancariasPage() {
                 <TrendingUp size={22} color="#FFFFFF" />
               </div>
               <h4 style={benefitTitleStyle}>Sin retrasos</h4>
-              <p style={benefitDescStyle}>Conciliacion continua evita acumulacion</p>
+              <p style={benefitDescStyle}>Conciliación continua evita acumulación</p>
             </div>
 
             <div style={benefitCardStyle}>
@@ -310,6 +324,8 @@ export default function ConciliacionesBancariasPage() {
             target="_blank"
             rel="noopener noreferrer"
             style={ctaButtonWhiteStyle}
+            onMouseEnter={() => setIsFinalCtaHovered(true)}
+            onMouseLeave={() => setIsFinalCtaHovered(false)}
           >
             Hablar con nuestro equipo
           </a>

@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { Clock, Bell } from 'lucide-react';
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import NetworkBackground from '../../components/ui/NetworkBackground';
 
 export default function AgendasArlPage() {
+  const [isCtaHovered, setIsCtaHovered] = useState(false);
+
   const pageStyle: React.CSSProperties = {
     minHeight: '100vh',
     background: '#FFFFFF',
@@ -107,7 +110,9 @@ export default function AgendasArlPage() {
   };
 
   const ctaButtonWhiteStyle: React.CSSProperties = {
-    display: 'inline-block',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
     padding: '1rem 2.5rem',
     background: '#FFFFFF',
     color: '#1E40AF',
@@ -115,8 +120,11 @@ export default function AgendasArlPage() {
     fontSize: '1rem',
     fontWeight: '600',
     textDecoration: 'none',
-    transition: 'all 0.3s',
-    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)'
+    transition: 'all 0.3s ease',
+    boxShadow: isCtaHovered
+      ? '0 15px 35px rgba(0, 0, 0, 0.25)'
+      : '0 10px 25px rgba(0, 0, 0, 0.15)',
+    transform: isCtaHovered ? 'scale(1.05)' : 'scale(1)'
   };
 
   return (
@@ -126,7 +134,7 @@ export default function AgendasArlPage() {
         <Header />
 
         <section style={heroStyle}>
-          <div style={badgeStyle}>Proximamente Q3 2026</div>
+          <div style={badgeStyle}>Próximamente Q3 2026</div>
           <h1 style={titleStyle}>Gestiona agendas ARL sin complicaciones</h1>
           <p style={subtitleStyle}>
             Organiza capacitaciones, inspecciones y reuniones de SST en un solo lugar.
@@ -136,10 +144,10 @@ export default function AgendasArlPage() {
         <div style={contentStyle}>
           <div style={cardStyle}>
             <p style={descStyle}>
-              Esta solucion te ayudara a programar y dar seguimiento a todas las actividades requeridas por las ARL: capacitaciones, inspecciones, reuniones del COPASST y mas.
+              Esta solución te ayudará a programar y dar seguimiento a todas las actividades requeridas por las ARL: capacitaciones, inspecciones, reuniones del COPASST y más.
             </p>
             <p style={descStyle}>
-              Recibe recordatorios automaticos y genera actas de cumplimiento con un clic.
+              Recibe recordatorios automáticos y genera actas de cumplimiento con un clic.
             </p>
 
             <div style={{ marginTop: '2rem' }}>
@@ -149,11 +157,11 @@ export default function AgendasArlPage() {
               </div>
               <div style={featureStyle}>
                 <Clock size={20} color="#1E40AF" />
-                <span>Recordatorios automaticos</span>
+                <span>Recordatorios automáticos</span>
               </div>
               <div style={featureStyle}>
                 <Clock size={20} color="#1E40AF" />
-                <span>Generacion de actas y evidencias</span>
+                <span>Generación de actas y evidencias</span>
               </div>
             </div>
           </div>
@@ -162,13 +170,15 @@ export default function AgendasArlPage() {
         <section style={ctaSectionStyle}>
           <h2 style={ctaTitleStyle}>¿Quieres ser de los primeros en probarlo?</h2>
           <a
-            href="https://wa.me/573124069303?text=Hola,%20quiero%20que%20me%20notifiquen%20cuando%20este%20disponible%20la%20automatizacion%20de%20Agendas%20ARL"
+            href="https://wa.me/573124069303?text=Hola,%20quiero%20que%20me%20notifiquen%20cuando%20esté%20disponible%20la%20automatización%20de%20Agendas%20ARL"
             target="_blank"
             rel="noopener noreferrer"
             style={ctaButtonWhiteStyle}
+            onMouseEnter={() => setIsCtaHovered(true)}
+            onMouseLeave={() => setIsCtaHovered(false)}
           >
-            <Bell size={18} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} />
-            Notificame cuando este listo
+            <Bell size={24} />
+            Notifícame cuando esté listo
           </a>
         </section>
       </div>

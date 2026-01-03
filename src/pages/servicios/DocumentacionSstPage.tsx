@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { Clock, Bell } from 'lucide-react';
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import NetworkBackground from '../../components/ui/NetworkBackground';
 
 export default function DocumentacionSstPage() {
+  const [isCtaHovered, setIsCtaHovered] = useState(false);
+
   const pageStyle: React.CSSProperties = {
     minHeight: '100vh',
     background: '#FFFFFF',
@@ -107,7 +110,9 @@ export default function DocumentacionSstPage() {
   };
 
   const ctaButtonWhiteStyle: React.CSSProperties = {
-    display: 'inline-block',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
     padding: '1rem 2.5rem',
     background: '#FFFFFF',
     color: '#1E40AF',
@@ -115,8 +120,11 @@ export default function DocumentacionSstPage() {
     fontSize: '1rem',
     fontWeight: '600',
     textDecoration: 'none',
-    transition: 'all 0.3s',
-    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)'
+    transition: 'all 0.3s ease',
+    boxShadow: isCtaHovered
+      ? '0 15px 35px rgba(0, 0, 0, 0.25)'
+      : '0 10px 25px rgba(0, 0, 0, 0.15)',
+    transform: isCtaHovered ? 'scale(1.05)' : 'scale(1)'
   };
 
   return (
@@ -126,20 +134,20 @@ export default function DocumentacionSstPage() {
         <Header />
 
         <section style={heroStyle}>
-          <div style={badgeStyle}>Proximamente Q3 2026</div>
-          <h1 style={titleStyle}>Documentacion SST al dia, siempre</h1>
+          <div style={badgeStyle}>Próximamente Q3 2026</div>
+          <h1 style={titleStyle}>Documentación SST al día, siempre</h1>
           <p style={subtitleStyle}>
-            Genera y actualiza toda la documentacion del Sistema de Gestion SST automaticamente.
+            Genera y actualiza toda la documentación del Sistema de Gestión SST automáticamente.
           </p>
         </section>
 
         <div style={contentStyle}>
           <div style={cardStyle}>
             <p style={descStyle}>
-              Esta solucion te permitira generar matrices de riesgos, planes de emergencia, politicas y todos los documentos exigidos por la normativa SST colombiana.
+              Esta solución te permitirá generar matrices de riesgos, planes de emergencia, políticas y todos los documentos exigidos por la normativa SST colombiana.
             </p>
             <p style={descStyle}>
-              Mantente siempre preparado para auditorias sin perder horas en documentacion manual.
+              Mantente siempre preparado para auditorías sin perder horas en documentación manual.
             </p>
 
             <div style={{ marginTop: '2rem' }}>
@@ -149,7 +157,7 @@ export default function DocumentacionSstPage() {
               </div>
               <div style={featureStyle}>
                 <Clock size={20} color="#1E40AF" />
-                <span>Actualizacion automatica de documentos</span>
+                <span>Actualización automática de documentos</span>
               </div>
               <div style={featureStyle}>
                 <Clock size={20} color="#1E40AF" />
@@ -162,13 +170,15 @@ export default function DocumentacionSstPage() {
         <section style={ctaSectionStyle}>
           <h2 style={ctaTitleStyle}>¿Quieres ser de los primeros en probarlo?</h2>
           <a
-            href="https://wa.me/573124069303?text=Hola,%20quiero%20que%20me%20notifiquen%20cuando%20este%20disponible%20la%20automatizacion%20de%20Documentacion%20SST"
+            href="https://wa.me/573124069303?text=Hola,%20quiero%20que%20me%20notifiquen%20cuando%20esté%20disponible%20la%20automatización%20de%20Documentación%20SST"
             target="_blank"
             rel="noopener noreferrer"
             style={ctaButtonWhiteStyle}
+            onMouseEnter={() => setIsCtaHovered(true)}
+            onMouseLeave={() => setIsCtaHovered(false)}
           >
-            <Bell size={18} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} />
-            Notificame cuando este listo
+            <Bell size={24} />
+            Notifícame cuando esté listo
           </a>
         </section>
       </div>

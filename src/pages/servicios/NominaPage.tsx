@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { Clock, Bell } from 'lucide-react';
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import NetworkBackground from '../../components/ui/NetworkBackground';
 
 export default function NominaPage() {
+  const [isCtaHovered, setIsCtaHovered] = useState(false);
+
   const pageStyle: React.CSSProperties = {
     minHeight: '100vh',
     background: '#FFFFFF',
@@ -107,7 +110,9 @@ export default function NominaPage() {
   };
 
   const ctaButtonWhiteStyle: React.CSSProperties = {
-    display: 'inline-block',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
     padding: '1rem 2.5rem',
     background: '#FFFFFF',
     color: '#1E40AF',
@@ -115,8 +120,11 @@ export default function NominaPage() {
     fontSize: '1rem',
     fontWeight: '600',
     textDecoration: 'none',
-    transition: 'all 0.3s',
-    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)'
+    transition: 'all 0.3s ease',
+    boxShadow: isCtaHovered
+      ? '0 15px 35px rgba(0, 0, 0, 0.25)'
+      : '0 10px 25px rgba(0, 0, 0, 0.15)',
+    transform: isCtaHovered ? 'scale(1.05)' : 'scale(1)'
   };
 
   return (
@@ -126,34 +134,34 @@ export default function NominaPage() {
         <Header />
 
         <section style={heroStyle}>
-          <div style={badgeStyle}>Proximamente Q1 2026</div>
-          <h1 style={titleStyle}>Valida nomina y seguridad social en minutos</h1>
+          <div style={badgeStyle}>Próximamente Q1 2026</div>
+          <h1 style={titleStyle}>Valida nómina y seguridad social en minutos</h1>
           <p style={subtitleStyle}>
-            Automatiza la verificacion de nomina electronica y cruza datos con seguridad social.
+            Automatiza la verificación de nómina electrónica y cruza datos con seguridad social.
           </p>
         </section>
 
         <div style={contentStyle}>
           <div style={cardStyle}>
             <p style={descStyle}>
-              Esta solucion te permitira validar automaticamente que todos los empleados en tu nomina electronica coincidan con los registros de seguridad social.
+              Esta solución te permitirá validar automáticamente que todos los empleados en tu nómina electrónica coincidan con los registros de seguridad social.
             </p>
             <p style={descStyle}>
-              Reduce de 1.5-2 horas por cada 10 empleados a solo 10 minutos de revision.
+              Reduce de 1.5-2 horas por cada 10 empleados a solo 10 minutos de revisión.
             </p>
 
             <div style={{ marginTop: '2rem' }}>
               <div style={featureStyle}>
                 <Clock size={20} color="#1E40AF" />
-                <span>Validacion automatica de afiliaciones</span>
+                <span>Validación automática de afiliaciones</span>
               </div>
               <div style={featureStyle}>
                 <Clock size={20} color="#1E40AF" />
-                <span>Deteccion de inconsistencias en aportes</span>
+                <span>Detección de inconsistencias en aportes</span>
               </div>
               <div style={featureStyle}>
                 <Clock size={20} color="#1E40AF" />
-                <span>Reportes listos para revision</span>
+                <span>Reportes listos para revisión</span>
               </div>
             </div>
           </div>
@@ -162,13 +170,15 @@ export default function NominaPage() {
         <section style={ctaSectionStyle}>
           <h2 style={ctaTitleStyle}>¿Quieres ser de los primeros en probarlo?</h2>
           <a
-            href="https://wa.me/573124069303?text=Hola,%20quiero%20que%20me%20notifiquen%20cuando%20este%20disponible%20la%20automatizacion%20de%20Nomina"
+            href="https://wa.me/573124069303?text=Hola,%20quiero%20que%20me%20notifiquen%20cuando%20esté%20disponible%20la%20automatización%20de%20Nómina"
             target="_blank"
             rel="noopener noreferrer"
             style={ctaButtonWhiteStyle}
+            onMouseEnter={() => setIsCtaHovered(true)}
+            onMouseLeave={() => setIsCtaHovered(false)}
           >
-            <Bell size={18} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} />
-            Notificame cuando este listo
+            <Bell size={24} />
+            Notifícame cuando esté listo
           </a>
         </section>
       </div>

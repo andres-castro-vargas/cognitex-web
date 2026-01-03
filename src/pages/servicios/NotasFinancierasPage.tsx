@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { Clock, Bell } from 'lucide-react';
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import NetworkBackground from '../../components/ui/NetworkBackground';
 
 export default function NotasFinancierasPage() {
+  const [isCtaHovered, setIsCtaHovered] = useState(false);
+
   const pageStyle: React.CSSProperties = {
     minHeight: '100vh',
     background: '#FFFFFF',
@@ -107,7 +110,9 @@ export default function NotasFinancierasPage() {
   };
 
   const ctaButtonWhiteStyle: React.CSSProperties = {
-    display: 'inline-block',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
     padding: '1rem 2.5rem',
     background: '#FFFFFF',
     color: '#1E40AF',
@@ -115,8 +120,11 @@ export default function NotasFinancierasPage() {
     fontSize: '1rem',
     fontWeight: '600',
     textDecoration: 'none',
-    transition: 'all 0.3s',
-    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)'
+    transition: 'all 0.3s ease',
+    boxShadow: isCtaHovered
+      ? '0 15px 35px rgba(0, 0, 0, 0.25)'
+      : '0 10px 25px rgba(0, 0, 0, 0.15)',
+    transform: isCtaHovered ? 'scale(1.05)' : 'scale(1)'
   };
 
   return (
@@ -126,30 +134,30 @@ export default function NotasFinancierasPage() {
         <Header />
 
         <section style={heroStyle}>
-          <div style={badgeStyle}>Proximamente Q2 2026</div>
+          <div style={badgeStyle}>Próximamente Q2 2026</div>
           <h1 style={titleStyle}>Actualiza tus notas financieras en segundos</h1>
           <p style={subtitleStyle}>
-            Elimina el copy-paste manual de Excel a Word y genera notas actualizadas automaticamente.
+            Elimina el copy-paste manual de Excel a Word y genera notas actualizadas automáticamente.
           </p>
         </section>
 
         <div style={contentStyle}>
           <div style={cardStyle}>
             <p style={descStyle}>
-              Esta solucion conectara directamente con tus balances y estados financieros en Excel, actualizando automaticamente las notas a los estados financieros en Word.
+              Esta solución conectará directamente con tus balances y estados financieros en Excel, actualizando automáticamente las notas a los estados financieros en Word.
             </p>
             <p style={descStyle}>
-              Sin digitacion manual, sin errores de transcripcion. Cada vez que actualices tus cifras, las notas se regeneran automaticamente.
+              Sin digitación manual, sin errores de transcripción. Cada vez que actualices tus cifras, las notas se regeneran automáticamente.
             </p>
 
             <div style={{ marginTop: '2rem' }}>
               <div style={featureStyle}>
                 <Clock size={20} color="#1E40AF" />
-                <span>Conexion directa Excel a Word</span>
+                <span>Conexión directa Excel a Word</span>
               </div>
               <div style={featureStyle}>
                 <Clock size={20} color="#1E40AF" />
-                <span>Actualizacion automatica de cifras</span>
+                <span>Actualización automática de cifras</span>
               </div>
               <div style={featureStyle}>
                 <Clock size={20} color="#1E40AF" />
@@ -162,13 +170,15 @@ export default function NotasFinancierasPage() {
         <section style={ctaSectionStyle}>
           <h2 style={ctaTitleStyle}>¿Quieres ser de los primeros en probarlo?</h2>
           <a
-            href="https://wa.me/573124069303?text=Hola,%20quiero%20que%20me%20notifiquen%20cuando%20este%20disponible%20la%20automatizacion%20de%20Notas%20Financieras"
+            href="https://wa.me/573124069303?text=Hola,%20quiero%20que%20me%20notifiquen%20cuando%20esté%20disponible%20la%20automatización%20de%20Notas%20Financieras"
             target="_blank"
             rel="noopener noreferrer"
             style={ctaButtonWhiteStyle}
+            onMouseEnter={() => setIsCtaHovered(true)}
+            onMouseLeave={() => setIsCtaHovered(false)}
           >
-            <Bell size={18} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} />
-            Notificame cuando este listo
+            <Bell size={24} />
+            Notifícame cuando esté listo
           </a>
         </section>
       </div>

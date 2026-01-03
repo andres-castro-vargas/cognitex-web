@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import { AlertCircle, Clock, FileX, Upload, Brain, FileCheck, Zap, TrendingUp, Shield } from 'lucide-react';
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import NetworkBackground from '../../components/ui/NetworkBackground';
 
 export default function CausacionesPage() {
+  const [isHeroCtaHovered, setIsHeroCtaHovered] = useState(false);
+  const [isFinalCtaHovered, setIsFinalCtaHovered] = useState(false);
+
   // Estilos - Tema Claro
   const pageStyle: React.CSSProperties = {
     minHeight: '100vh',
@@ -50,8 +54,11 @@ export default function CausacionesPage() {
     fontSize: '1rem',
     fontWeight: '600',
     textDecoration: 'none',
-    transition: 'all 0.3s',
-    boxShadow: '0 10px 25px rgba(30, 64, 175, 0.25)'
+    transition: 'all 0.3s ease',
+    boxShadow: isHeroCtaHovered
+      ? '0 15px 35px rgba(30, 64, 175, 0.35)'
+      : '0 10px 25px rgba(30, 64, 175, 0.25)',
+    transform: isHeroCtaHovered ? 'scale(1.05)' : 'scale(1)'
   };
 
   const sectionStyle: React.CSSProperties = {
@@ -132,8 +139,10 @@ export default function CausacionesPage() {
 
   const benefitsContainerStyle: React.CSSProperties = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-    gap: '1.5rem'
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gap: '1.5rem',
+    maxWidth: '600px',
+    margin: '0 auto'
   };
 
   const benefitCardStyle: React.CSSProperties = {
@@ -194,8 +203,11 @@ export default function CausacionesPage() {
     fontSize: '1rem',
     fontWeight: '600',
     textDecoration: 'none',
-    transition: 'all 0.3s',
-    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)'
+    transition: 'all 0.3s ease',
+    boxShadow: isFinalCtaHovered
+      ? '0 15px 35px rgba(0, 0, 0, 0.25)'
+      : '0 10px 25px rgba(0, 0, 0, 0.15)',
+    transform: isFinalCtaHovered ? 'scale(1.05)' : 'scale(1)'
   };
 
   return (
@@ -215,6 +227,8 @@ export default function CausacionesPage() {
             target="_blank"
             rel="noopener noreferrer"
             style={ctaButtonStyle}
+            onMouseEnter={() => setIsHeroCtaHovered(true)}
+            onMouseLeave={() => setIsHeroCtaHovered(false)}
           >
             Agendar Demo Gratis
           </a>
@@ -231,7 +245,7 @@ export default function CausacionesPage() {
 
           <div style={problemCardStyle}>
             <Clock size={24} color="#DC2626" />
-            <span style={problemTextStyle}>Los errores de digitacion generan reprocesos constantes</span>
+            <span style={problemTextStyle}>Los errores de digitación generan reprocesos constantes</span>
           </div>
 
           <div style={problemCardStyle}>
@@ -240,24 +254,24 @@ export default function CausacionesPage() {
           </div>
         </section>
 
-        {/* SOLUCION */}
+        {/* SOLUCIÓN */}
         <section style={sectionStyle}>
-          <h2 style={sectionTitleStyle}>Asi lo resolvemos</h2>
+          <h2 style={sectionTitleStyle}>Así lo resolvemos</h2>
 
           <div style={stepsContainerStyle}>
             <div style={stepCardStyle}>
               <div style={stepNumberStyle}>
                 <Upload size={24} />
               </div>
-              <h3 style={stepTitleStyle}>Descarga automatica</h3>
-              <p style={stepDescStyle}>Conectamos con DIAN y descargamos tus facturas automaticamente</p>
+              <h3 style={stepTitleStyle}>Descarga automática</h3>
+              <p style={stepDescStyle}>Conectamos con DIAN y descargamos tus facturas automáticamente</p>
             </div>
 
             <div style={stepCardStyle}>
               <div style={stepNumberStyle}>
                 <Brain size={24} />
               </div>
-              <h3 style={stepTitleStyle}>Clasificacion inteligente</h3>
+              <h3 style={stepTitleStyle}>Clasificación inteligente</h3>
               <p style={stepDescStyle}>El sistema aprende tus reglas y asigna el PUC correcto</p>
             </div>
 
@@ -281,22 +295,22 @@ export default function CausacionesPage() {
                 <Clock size={22} color="#FFFFFF" />
               </div>
               <h4 style={benefitTitleStyle}>15-20 horas/mes</h4>
-              <p style={benefitDescStyle}>Tiempo recuperado en digitacion</p>
+              <p style={benefitDescStyle}>Tiempo recuperado en digitación</p>
             </div>
 
             <div style={benefitCardStyle}>
               <div style={benefitIconStyle}>
                 <Zap size={22} color="#FFFFFF" />
               </div>
-              <h4 style={benefitTitleStyle}>99% precision</h4>
-              <p style={benefitDescStyle}>Elimina errores de transcripcion</p>
+              <h4 style={benefitTitleStyle}>99% precisión</h4>
+              <p style={benefitDescStyle}>Elimina errores de transcripción</p>
             </div>
 
             <div style={benefitCardStyle}>
               <div style={benefitIconStyle}>
                 <TrendingUp size={22} color="#FFFFFF" />
               </div>
-              <h4 style={benefitTitleStyle}>3x mas clientes</h4>
+              <h4 style={benefitTitleStyle}>3x más clientes</h4>
               <p style={benefitDescStyle}>Capacidad para crecer sin contratar</p>
             </div>
 
@@ -304,7 +318,7 @@ export default function CausacionesPage() {
               <div style={benefitIconStyle}>
                 <Shield size={22} color="#FFFFFF" />
               </div>
-              <h4 style={benefitTitleStyle}>Tu revision</h4>
+              <h4 style={benefitTitleStyle}>Tu revisión</h4>
               <p style={benefitDescStyle}>El contador siempre valida el 100%</p>
             </div>
           </div>
@@ -318,6 +332,8 @@ export default function CausacionesPage() {
             target="_blank"
             rel="noopener noreferrer"
             style={ctaButtonWhiteStyle}
+            onMouseEnter={() => setIsFinalCtaHovered(true)}
+            onMouseLeave={() => setIsFinalCtaHovered(false)}
           >
             Hablar con nuestro equipo
           </a>
