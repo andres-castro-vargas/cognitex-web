@@ -24,6 +24,24 @@ interface AutomationFormModalProps {
 
 const WEBHOOK_URL = 'https://evolutionapi-n8n-workflows.gdvjzg.easypanel.host/webhook/automation-assessment';
 
+// Email validation regex (RFC 5322 simplified)
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+// Sanitize input to prevent XSS
+const sanitizeInput = (input: string): string => {
+  return input
+    .replace(/[<>]/g, '') // Remove angle brackets
+    .replace(/javascript:/gi, '') // Remove javascript: protocol
+    .replace(/on\w+=/gi, '') // Remove event handlers
+    .trim()
+    .slice(0, 500); // Limit length
+};
+
+// Validate email format
+const isValidEmail = (email: string): boolean => {
+  return EMAIL_REGEX.test(email) && email.length <= 254;
+};
+
 export default function AutomationFormModal({ isOpen, onClose }: AutomationFormModalProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
@@ -38,6 +56,8 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [lastSubmitTime, setLastSubmitTime] = useState(0);
 
   // Block body scroll when modal is open
   useEffect(() => {
@@ -75,6 +95,7 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
       });
       setIsSuccess(false);
       setIsError(false);
+      setEmailError('');
     }
   }, [isOpen]);
 
@@ -121,6 +142,10 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    // Clear email error when user types
+    if (name === 'email' && emailError) {
+      setEmailError('');
+    }
   };
 
   const canProceed = () => {
@@ -137,23 +162,41 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
     e.preventDefault();
     if (!canProceed()) return;
 
+    // Rate limiting: prevent spam (30 seconds between submissions)
+    const now = Date.now();
+    if (now - lastSubmitTime < 30000) {
+      setEmailError('Por favor espera unos segundos antes de intentar de nuevo');
+      return;
+    }
+
+    // Validate email format
+    if (!isValidEmail(formData.email)) {
+      setEmailError('Por favor ingresa un correo electrónico válido');
+      return;
+    }
+
     setIsSubmitting(true);
+    setLastSubmitTime(now);
+
     try {
+      // Sanitize all inputs before sending
+      const sanitizedData = {
+        fullName: sanitizeInput(formData.fullName),
+        email: sanitizeInput(formData.email.toLowerCase()),
+        company: sanitizeInput(formData.company),
+        phone: sanitizeInput(formData.phone),
+        industry: formData.industry, // Already from controlled options
+        size: formData.size, // Already from controlled options
+        processes: formData.processes, // Already from controlled options
+        source: 'cognitex.co',
+        formType: 'automation-assessment',
+        timestamp: new Date().toISOString()
+      };
+
       await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          email: formData.email,
-          company: formData.company,
-          phone: formData.phone,
-          industry: formData.industry,
-          size: formData.size,
-          processes: formData.processes,
-          source: 'cognitex.co',
-          formType: 'automation-assessment',
-          timestamp: new Date().toISOString()
-        })
+        body: JSON.stringify(sanitizedData)
       });
       setIsSuccess(true);
     } catch {
@@ -408,7 +451,7 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
           <div style={errorIconStyle}>
             <AlertCircle size={40} color="#FFFFFF" />
           </div>
-          <h2 style={titleStyle}>Hubo un problema</h2>
+          <h2 id="modal-title" style={titleStyle}>Hubo un problema</h2>
           <p style={{ ...subtitleStyle, marginBottom: '1.5rem' }}>
             No pudimos enviar tu información. Por favor intenta de nuevo o contáctanos directamente por WhatsApp.
           </p>
@@ -441,7 +484,7 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
           <div style={resultIconStyle}>
             <CheckCircle size={40} color="#FFFFFF" />
           </div>
-          <h2 style={titleStyle}>Hemos recibido tu información</h2>
+          <h2 id="modal-title" style={titleStyle}>Hemos recibido tu información</h2>
           <p style={{ ...subtitleStyle, marginBottom: '0.5rem' }}>
             En los próximos minutos recibirás en tu correo:
           </p>
@@ -479,7 +522,7 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
       case 1:
         return (
           <>
-            <h2 style={titleStyle}>¿En qué industria opera tu empresa?</h2>
+            <h2 id="modal-title" style={titleStyle}>¿En qué industria opera tu empresa?</h2>
             <p style={subtitleStyle}>Esto nos ayuda a personalizar las soluciones para tu sector</p>
             <div style={optionsGridStyle}>
               {industries.map(ind => (
@@ -502,7 +545,7 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
       case 2:
         return (
           <>
-            <h2 style={titleStyle}>¿Cuántos empleados tiene tu empresa?</h2>
+            <h2 id="modal-title" style={titleStyle}>¿Cuántos empleados tiene tu empresa?</h2>
             <p style={subtitleStyle}>Esto determina la escala de automatización que necesitas</p>
             <div style={optionsGridStyle}>
               {sizes.map(size => (
@@ -525,7 +568,7 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
       case 3:
         return (
           <>
-            <h2 style={titleStyle}>¿Qué procesos quieres automatizar?</h2>
+            <h2 id="modal-title" style={titleStyle}>¿Qué procesos quieres automatizar?</h2>
             <p style={subtitleStyle}>Puedes seleccionar múltiples opciones</p>
             <div style={optionsGridStyle}>
               {processes.map(proc => (
@@ -548,7 +591,7 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
       case 4:
         return (
           <>
-            <h2 style={titleStyle}>Déjanos tus datos</h2>
+            <h2 id="modal-title" style={titleStyle}>Déjanos tus datos</h2>
             <p style={subtitleStyle}>Te enviaremos un diagnóstico personalizado de automatización</p>
             <form onSubmit={handleSubmit}>
               <input
@@ -566,9 +609,19 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
                 placeholder="Correo empresarial"
                 value={formData.email}
                 onChange={handleInputChange}
-                style={inputStyle}
+                style={{
+                  ...inputStyle,
+                  borderColor: emailError ? '#EF4444' : '#3a3a3a'
+                }}
                 required
+                aria-invalid={!!emailError}
+                aria-describedby={emailError ? 'email-error' : undefined}
               />
+              {emailError && (
+                <p id="email-error" role="alert" style={{ color: '#EF4444', fontSize: '0.85rem', marginTop: '-0.75rem', marginBottom: '1rem' }}>
+                  {emailError}
+                </p>
+              )}
               <input
                 type="text"
                 name="company"
@@ -605,14 +658,24 @@ export default function AutomationFormModal({ isOpen, onClose }: AutomationFormM
   };
 
   return (
-    <div style={overlayStyle} onClick={onClose}>
-      <div style={modalStyle} onClick={e => e.stopPropagation()}>
+    <div style={overlayStyle} onClick={onClose} role="presentation">
+      <div
+        style={modalStyle}
+        onClick={e => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+      >
         <div style={headerStyle}>
-          <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>
-            {!isSuccess && `Paso ${currentStep} de 4`}
+          <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }} aria-live="polite">
+            {!isSuccess && !isError && `Paso ${currentStep} de 4`}
           </span>
-          <button style={closeButtonStyle} onClick={onClose}>
-            <X size={18} color="#FFFFFF" />
+          <button
+            style={closeButtonStyle}
+            onClick={onClose}
+            aria-label="Cerrar formulario"
+          >
+            <X size={18} color="#FFFFFF" aria-hidden="true" />
           </button>
         </div>
 

@@ -4,6 +4,56 @@ Registro de cambios del sitio web cognitex.co
 
 ---
 
+## [2.4.0] - 2026-01-03
+
+### Limpieza Mayor + Seguridad + Performance + Accesibilidad
+
+#### Seguridad
+- **nginx.conf**: Agregado Content-Security-Policy header completo
+- **AutomationFormModal**: Validacion de email con regex RFC 5322
+- **AutomationFormModal**: Sanitizacion de inputs (XSS prevention)
+- **AutomationFormModal**: Rate limiting 30s entre envios
+- **.gitignore**: Agregados `.env`, `.env.local`, `.env.production`
+
+#### Performance
+- **App.tsx**: Lazy loading para todas las rutas con React.lazy()
+- **App.tsx**: PageLoader spinner durante carga de paginas
+- **index.html**: Preconnect para fonts.googleapis.com y fonts.gstatic.com
+
+#### Accesibilidad (WCAG)
+- **AutomationFormModal**: `role="dialog"`, `aria-modal`, `aria-labelledby`
+- **AutomationFormModal**: `aria-invalid` y `aria-describedby` para errores
+- **AutomationFormModal**: `role="alert"` para mensajes de error
+- **AutomationFormModal**: `aria-label` en boton cerrar
+- **AutomationFormModal**: `aria-live="polite"` para paso actual
+
+#### Limpieza de Codigo Muerto
+- **Eliminados 10 componentes no usados:**
+  - Contact.tsx, FloatingButtons.tsx, Footer.tsx, Header.tsx
+  - Hero.tsx, NetworkBackground.tsx, Process.tsx, RobotLogo.tsx
+  - ScrollIndicator.tsx, Services.tsx
+- **Eliminada pagina Home.tsx** (duplicado de HomePage.tsx)
+- **Eliminado App.css** (no importado)
+- **Eliminadas 6 imagenes no usadas:**
+  - automatizacion.png
+  - conciliaciones-bancaria-cuadrada.png
+  - conciliaciones-dian-cuadrada.png
+  - nomima-cuadrada.png
+  - notas-financieras-cuadrada.png
+
+#### SEO y PWA
+- **public/manifest.json**: Nuevo archivo para instalacion como app
+- **public/robots.txt**: Nuevo archivo con sitemap reference
+- **public/sitemap.xml**: 11 URLs indexadas
+
+#### Metadatos
+- **package.json**: Corregido name a "cognitex-web", version a "2.4.0"
+
+> Ver auditoria completa en `docs/AUDITORIA-COGNITEX-WEB-2026-01-03.md`
+> Corregidos 14 de 21 hallazgos de la auditoria
+
+---
+
 ## [2.3.1] - 2026-01-03
 
 ### Patch de Seguridad y Correcciones

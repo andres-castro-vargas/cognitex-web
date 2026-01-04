@@ -1,0 +1,26 @@
+{
+  "name": "Cognitex - Automatizacion Inteligente",
+  "short_name": "Cognitex",
+  "description": "Impulsamos el crecimiento de tu empresa mediante soluciones inteligentes que operan sin interrupciones.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#175197",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon-cognitex.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo_cognitex.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "lang": "es-CO"
+}
