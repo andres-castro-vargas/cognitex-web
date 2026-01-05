@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import './ServicesCarousel.css';
+import useEmblaCarousel from 'embla-carousel-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import causacionesImg from '../../assets/services/causaciones.png';
 import conciliacionDianImg from '../../assets/services/conciliaciones-dian.png';
@@ -23,6 +24,22 @@ interface ServiceCard {
 export default function ServicesSection() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [hoveredSstCard, setHoveredSstCard] = useState<string | null>(null);
+
+  // Embla Carousel para navegacion manual
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: 'start',
+    dragFree: true,
+    containScroll: 'trimSnaps'
+  });
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
 
   // SECCIÓN 1: Soluciones para Contadores
   const contadorServices: ServiceCard[] = [
@@ -166,26 +183,37 @@ export default function ServicesSection() {
     letterSpacing: '0.5px'
   };
 
-  const carouselContainerStyle: React.CSSProperties = {
-    overflow: 'visible',
+  const carouselWrapperStyle: React.CSSProperties = {
     position: 'relative',
-    width: '100%',
-    margin: '0 auto',
-    padding: '2rem 0 4rem 0',
-    WebkitMaskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
-    maskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)'
+    padding: '0 60px'
   };
 
-  const carouselTrackStyle: React.CSSProperties = {
+  const emblaContainerStyle: React.CSSProperties = {
+    overflow: 'hidden',
+    padding: '2rem 0'
+  };
+
+  const emblaSlideContainerStyle: React.CSSProperties = {
     display: 'flex',
-    gap: '2rem',
-    animation: 'scroll 60s linear infinite',
-    width: 'fit-content'
+    gap: '2rem'
   };
 
-  const carouselTrackPausedStyle: React.CSSProperties = {
-    ...carouselTrackStyle,
-    animationPlayState: 'paused'
+  const navButtonStyle: React.CSSProperties = {
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    zIndex: 10,
+    background: 'linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)',
+    border: 'none',
+    borderRadius: '50%',
+    width: '48px',
+    height: '48px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    boxShadow: '0 4px 15px rgba(30, 64, 175, 0.3)',
+    transition: 'all 0.3s ease'
   };
 
   const renderServiceCard = (service: ServiceCard, customHoverId?: string) => {
@@ -233,19 +261,53 @@ export default function ServicesSection() {
     <section id="servicios" style={sectionStyle}>
       <h2 style={mainTitleStyle}>Servicios que Transforman tu Empresa</h2>
 
-      {/* SECCIÓN 1: Soluciones para Contadores - CON CARRUSEL */}
+      {/* SECCIÓN 1: Soluciones para Contadores - CON EMBLA CAROUSEL */}
       <div style={categoryContainerStyle}>
         <h3 style={categoryTitleStyle}>Soluciones para Contadores Públicos</h3>
-        <div style={carouselContainerStyle}>
-          <div style={hoveredCard ? carouselTrackPausedStyle : carouselTrackStyle}>
-            {/* Primera copia de las tarjetas */}
-            {contadorServices.map((service, index) =>
-              renderServiceCard(service, `contador-${index}`)
-            )}
-            {/* Segunda copia para efecto infinito */}
-            {contadorServices.map((service, index) =>
-              renderServiceCard(service, `contador-dup-${index}`)
-            )}
+        <div style={carouselWrapperStyle}>
+          {/* Flecha izquierda */}
+          <button
+            onClick={scrollPrev}
+            style={{ ...navButtonStyle, left: '0' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
+              e.currentTarget.style.boxShadow = '0 6px 20px rgba(30, 64, 175, 0.5)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+              e.currentTarget.style.boxShadow = '0 4px 15px rgba(30, 64, 175, 0.3)';
+            }}
+            aria-label="Anterior"
+          >
+            <ChevronLeft color="white" size={24} />
+          </button>
+
+          {/* Flecha derecha */}
+          <button
+            onClick={scrollNext}
+            style={{ ...navButtonStyle, right: '0' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)';
+              e.currentTarget.style.boxShadow = '0 6px 20px rgba(30, 64, 175, 0.5)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+              e.currentTarget.style.boxShadow = '0 4px 15px rgba(30, 64, 175, 0.3)';
+            }}
+            aria-label="Siguiente"
+          >
+            <ChevronRight color="white" size={24} />
+          </button>
+
+          {/* Carrusel Embla con drag/swipe */}
+          <div ref={emblaRef} style={emblaContainerStyle}>
+            <div style={emblaSlideContainerStyle}>
+              {contadorServices.map((service, index) => (
+                <div key={`slide-${index}`} style={{ flex: '0 0 380px' }}>
+                  {renderServiceCard(service, `contador-${index}`)}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

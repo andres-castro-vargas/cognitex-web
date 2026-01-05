@@ -1,6 +1,7 @@
 import { useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom'
 import WhatsAppFloat from './components/ui/WhatsAppFloat'
+import ErrorBoundary from './components/ErrorBoundary'
 
 // Lazy load pages for better performance
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -53,7 +54,7 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <>
+    <ErrorBoundary>
       <ScrollToTop />
       <WhatsAppFloat />
       <Suspense fallback={<PageLoader />}>
@@ -75,7 +76,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
-    </>
+    </ErrorBoundary>
   )
 }
 

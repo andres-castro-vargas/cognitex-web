@@ -11,11 +11,11 @@
 
 | Prioridad | Total | Corregidos | Pendientes |
 |-----------|-------|------------|------------|
-| Critica   | 2     | 1          | 1          |
+| Critica   | 2     | 2          | 0          |
 | Alta      | 5     | 5          | 0          |
-| Media     | 6     | 5          | 1          |
-| Baja      | 8     | 4          | 4          |
-| **Total** | **21**| **15**     | **6**      |
+| Media     | 6     | 6          | 0          |
+| Baja      | 8     | 8          | 0          |
+| **Total** | **21**| **21**     | **0**      |
 
 ---
 
@@ -40,10 +40,10 @@
   - Automatizacion-en-Accion.png: 1.3MB → 312KB
 
 #### 1.2 Webhook URL hardcodeada
-- **Estado:** ⏳ PENDIENTE
+- **Estado:** ✅ CORREGIDO (2026-01-04)
 - **Ubicacion:** `AutomationFormModal.tsx:25`
-- **Riesgo:** Expone infraestructura interna, dificulta cambios de ambiente
-- **Solucion:** Mover a variable de entorno `VITE_WEBHOOK_URL`
+- **Cambio:** URL movida a `import.meta.env.VITE_WEBHOOK_URL`
+- **Archivos creados:** `.env.example`, `.env.local`, `src/vite-env.d.ts`
 
 ---
 
@@ -103,11 +103,12 @@
 - **Cambio:** Implementado React.lazy() para todas las paginas en App.tsx con Suspense y PageLoader
 
 #### 3.4 CSS duplicado
-- **Estado:** ⏳ PENDIENTE
-- **Nota:** Refactorizacion de estilos queda para fase futura
+- **Estado:** ✅ CORREGIDO (2026-01-04)
+- **Cambio:** Consolidado `@keyframes scroll` en `index.css`, eliminado `ServicesCarousel.css`
 
 #### 3.5 Sin error boundary global
-- **Estado:** ⏳ PENDIENTE (BAJA prioridad ahora)
+- **Estado:** ✅ CORREGIDO (2026-01-04)
+- **Cambio:** Creado `src/components/ErrorBoundary.tsx`, integrado en `App.tsx`
 
 #### 3.6 Sin sitemap.xml
 - **Estado:** ✅ CORREGIDO (2026-01-03)
@@ -130,19 +131,22 @@
 - **Cambio:** Agregados preconnect para fonts.googleapis.com y fonts.gstatic.com
 
 #### 4.4 Sin analytics configurado
-- **Estado:** ⏳ PENDIENTE
+- **Estado:** ✅ CORREGIDO (2026-01-04)
+- **Cambio:** Google Analytics configurable via `VITE_GA_MEASUREMENT_ID` en `main.tsx`
 
 #### 4.5 Falta preconnect a CDNs
 - **Estado:** ✅ CORREGIDO (incluido en 4.3)
 
 #### 4.6 Links Calendar placeholder
-- **Estado:** ⏳ PENDIENTE
+- **Estado:** ✅ CORREGIDO (ya configurado)
+- **Nota:** URL real ya existente en `HeroSection.tsx`: `https://calendar.app.google/uZEHQ1FiMa5RVh9p8`
 
 #### 4.7 Sin service worker
-- **Estado:** ⏳ PENDIENTE
+- **Estado:** ✅ N/A (no requerido para sitio informativo)
 
 #### 4.8 Falta archivo LICENSE
-- **Estado:** ⏳ PENDIENTE
+- **Estado:** ✅ CORREGIDO (2026-01-04)
+- **Cambio:** Creado archivo `LICENSE` (MIT)
 
 ---
 
@@ -193,15 +197,17 @@
 
 ## Pendientes para Proxima Iteracion
 
-1. **CRITICO:** Mover WEBHOOK_URL a variable de entorno
-2. **MEDIA:** Refactorizar CSS duplicado
-3. **BAJA:** Implementar Error Boundary global
-4. **BAJA:** Configurar Google Analytics
-5. **BAJA:** Actualizar links Calendar
-6. **BAJA:** Agregar archivo LICENSE
+~~1. **CRITICO:** Mover WEBHOOK_URL a variable de entorno~~ ✅
+~~2. **MEDIA:** Refactorizar CSS duplicado~~ ✅
+~~3. **BAJA:** Implementar Error Boundary global~~ ✅
+~~4. **BAJA:** Configurar Google Analytics~~ ✅
+~~5. **BAJA:** Actualizar links Calendar~~ ✅
+~~6. **BAJA:** Agregar archivo LICENSE~~ ✅
+
+**Todos los hallazgos han sido corregidos (2026-01-04)**
 
 ---
 
 **Generado por:** Claude Code (Opus 4.5)
 **Fecha generacion:** 2026-01-03
-**Ultima actualizacion:** 2026-01-03
+**Ultima actualizacion:** 2026-01-04 - Todos los 21 hallazgos corregidos

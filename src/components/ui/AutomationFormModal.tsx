@@ -22,7 +22,7 @@ interface AutomationFormModalProps {
   onClose: () => void;
 }
 
-const WEBHOOK_URL = 'https://evolutionapi-n8n-workflows.gdvjzg.easypanel.host/webhook/automation-assessment';
+const WEBHOOK_URL = import.meta.env.VITE_WEBHOOK_URL || '';
 
 // Email validation regex (RFC 5322 simplified)
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;

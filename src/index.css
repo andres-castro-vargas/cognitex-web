@@ -80,8 +80,13 @@ body {
   animation: smile 3s ease-in-out infinite;
 }
 
-/* Marquee animation for footer */
+/* Marquee/scroll animation for carousels and footer */
 @keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }

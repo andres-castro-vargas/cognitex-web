@@ -65,7 +65,7 @@ export default function Header() {
   return (
     <>
       <header style={headerStyle}>
-        {/* Línea azul inferior - sutil para tema claro */}
+        {/* Línea azul inferior - desactivada */}
         <div
           style={{
             position: 'absolute',
@@ -74,7 +74,7 @@ export default function Header() {
             right: 0,
             height: '2px',
             background: 'linear-gradient(to right, transparent, #3B82F6, transparent)',
-            opacity: 0.6
+            opacity: 0
           }}
         />
 
