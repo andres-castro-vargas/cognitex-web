@@ -40,7 +40,7 @@ export default function ServiciosPage() {
         { text: 'Soporte prioritario', included: false }
       ],
       ctaText: 'Elegir Básico',
-      ctaLink: 'https://appcontadores.cognitex.co/registro?plan=basico'
+      ctaLink: 'https://wa.me/573104489087?text=Hola%2C%20quiero%20contratar%20el%20Plan%20Básico'
     },
     {
       name: 'Pro',
@@ -56,7 +56,7 @@ export default function ServiciosPage() {
       ],
       isPopular: true,
       ctaText: 'Elegir Pro',
-      ctaLink: 'https://appcontadores.cognitex.co/registro?plan=pro'
+      ctaLink: 'https://wa.me/573104489087?text=Hola%2C%20quiero%20contratar%20el%20Plan%20Pro'
     },
     {
       name: 'Enterprise',
@@ -72,7 +72,7 @@ export default function ServiciosPage() {
       ],
       isCustom: true,
       ctaText: 'Contactar Ventas',
-      ctaLink: 'https://wa.me/573124069303?text=Hola,%20me%20interesa%20el%20plan%20Enterprise%20de%20Contadores'
+      ctaLink: 'https://wa.me/573104489087?text=Hola%2C%20me%20interesa%20el%20Plan%20Enterprise'
     }
   ];
 
