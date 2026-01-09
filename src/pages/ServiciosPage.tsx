@@ -29,7 +29,7 @@ export default function ServiciosPage() {
     },
     {
       name: 'Básico',
-      price: '$39.900',
+      price: '$49.000',
       description: 'Ideal para contadores independientes',
       features: [
         { text: '500 facturas/mes', included: true },
@@ -44,10 +44,10 @@ export default function ServiciosPage() {
     },
     {
       name: 'Pro',
-      price: '$79.900',
+      price: '$99.000',
       description: 'Para firmas contables en crecimiento',
       features: [
-        { text: '1,000 facturas/mes', included: true },
+        { text: '2,000 facturas/mes', included: true },
         { text: 'Descargador DIAN', included: true },
         { text: 'Visor de Facturas', included: true },
         { text: 'Reportes avanzados', included: true },
