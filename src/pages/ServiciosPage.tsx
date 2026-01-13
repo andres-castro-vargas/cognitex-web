@@ -29,34 +29,32 @@ export default function ServiciosPage() {
     },
     {
       name: 'Básico',
-      price: '$49.000',
+      price: 'Consultar',
       description: 'Ideal para contadores independientes',
       features: [
         { text: '500 facturas/mes', included: true },
         { text: 'Descargador DIAN', included: true },
         { text: 'Visor de Facturas', included: true },
-        { text: 'Soporte por email', included: true },
-        { text: 'Reportes avanzados', included: false },
-        { text: 'Soporte prioritario', included: false }
+        { text: 'Soporte prioritario', included: false },
+        { text: 'Reportes avanzados', included: false }
       ],
-      ctaText: 'Elegir Básico',
-      ctaLink: 'https://wa.me/573104489087?text=Hola%2C%20quiero%20contratar%20el%20Plan%20Básico'
+      ctaText: 'Consultar plan',
+      ctaLink: 'https://wa.me/573104489087?text=Hola%2C%20me%20interesa%20el%20Plan%20Básico'
     },
     {
       name: 'Pro',
-      price: '$99.000',
+      price: 'Consultar',
       description: 'Para firmas contables en crecimiento',
       features: [
         { text: '2,000 facturas/mes', included: true },
         { text: 'Descargador DIAN', included: true },
         { text: 'Visor de Facturas', included: true },
         { text: 'Reportes avanzados', included: true },
-        { text: 'Soporte prioritario', included: true },
-        { text: 'Soporte por email', included: true }
+        { text: 'Soporte prioritario', included: true }
       ],
       isPopular: true,
-      ctaText: 'Elegir Pro',
-      ctaLink: 'https://wa.me/573104489087?text=Hola%2C%20quiero%20contratar%20el%20Plan%20Pro'
+      ctaText: 'Consultar plan',
+      ctaLink: 'https://wa.me/573104489087?text=Hola%2C%20me%20interesa%20el%20Plan%20Pro'
     },
     {
       name: 'Enterprise',
