@@ -39,7 +39,7 @@ export default function ServiciosPage() {
         { text: 'Reportes avanzados', included: false }
       ],
       ctaText: 'Consultar plan',
-      ctaLink: 'https://wa.me/573104489087?text=Hola%2C%20me%20interesa%20el%20Plan%20Básico'
+      ctaLink: 'https://wa.me/573203843407?text=Hola%2C%20me%20interesa%20el%20Plan%20Básico'
     },
     {
       name: 'Pro',
@@ -54,7 +54,7 @@ export default function ServiciosPage() {
       ],
       isPopular: true,
       ctaText: 'Consultar plan',
-      ctaLink: 'https://wa.me/573104489087?text=Hola%2C%20me%20interesa%20el%20Plan%20Pro'
+      ctaLink: 'https://wa.me/573203843407?text=Hola%2C%20me%20interesa%20el%20Plan%20Pro'
     },
     {
       name: 'Enterprise',
@@ -70,7 +70,7 @@ export default function ServiciosPage() {
       ],
       isCustom: true,
       ctaText: 'Contactar Ventas',
-      ctaLink: 'https://wa.me/573104489087?text=Hola%2C%20me%20interesa%20el%20Plan%20Enterprise'
+      ctaLink: 'https://wa.me/573203843407?text=Hola%2C%20me%20interesa%20el%20Plan%20Enterprise'
     }
   ];
 
